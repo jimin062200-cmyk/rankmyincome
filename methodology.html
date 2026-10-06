@@ -36,14 +36,14 @@
     <p>For the worldwide comparison, local income is converted to a common USD purchasing-power-parity unit using the WID.world PPP conversion series <code>xlcusp999i</code> or its source alias <code>xlcuspi999</code>. The converted amount is then compared with the WID <code>WO-PPP</code> worldwide pre-tax-income threshold distribution.</p>
 
     <h2>Values outside published thresholds</h2>
-    <p>If an income is below the lowest published threshold, RankMyIncome estimates the lower tail between zero and the first available WID point. If an income is above the highest published threshold, the calculator extrapolates from the final two available threshold points on a logarithmic scale.</p>
-    <p>Extreme results, especially very small top-percent figures such as top 0.01%, 0.001%, or 0.00001%, are extrapolated estimates rather than directly observed WID percentile thresholds. Uncertainty increases the farther a value lies outside the published data range.</p>
+    <p>If an income is below the lowest published threshold, RankMyIncome estimates the lower tail toward percentile zero. If an income is above the highest available WID threshold, the calculator extrapolates from the final two available threshold points on a logarithmic scale.</p>
+    <p>A very small top-percent result is not automatically extrapolated. When WID publishes threshold points covering that range, RankMyIncome interpolates between those published points. Only results beyond the highest available threshold use upper-tail extrapolation, and uncertainty increases the farther a value lies beyond the published range.</p>
 
     <h2>Tier system</h2>
     <p>The tier names are created by RankMyIncome for presentation and entertainment and are not official statistical classifications. Challenger begins at the top 0.1%, Grandmaster at the top 1%, Master at the top 5%, Diamond at the top 10%, Emerald at the top 15%, Platinum at the top 25%, Gold at the top 40%, Silver at the top 60%, Bronze at the top 80%, and Iron below that.</p>
 
     <h2>Data coverage and years</h2>
-    <p>The production dataset currently includes 208 countries and territories. The worldwide reference year is 2024. A country's latest usable distribution year or PPP year can differ from the worldwide reference year, and the calculator stores and displays the relevant year for each result.</p>
+    <p>The production dataset currently includes 208 countries and territories. The worldwide reference year is 2024. A country's latest usable distribution year or PPP year can differ from the worldwide reference year, and RankMyIncome uses the relevant country-specific years rather than assuming every country uses 2024 data.</p>
 
     <h2>Data source</h2>
     <p>Statistical data come from <a href="https://wid.world/" rel="noopener">WID.world</a>. For definitions and methodology, see the <a href="https://wid.world/codes-dictionary/" rel="noopener">WID Codes Dictionary</a> and <a href="https://wid.world/methodology/" rel="noopener">WID Methodology</a>.</p>

@@ -1,1 +1,70 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Methodology — RankMyIncome</title><meta name="description" content="How RankMyIncome estimates country and global income percentiles, purchasing-power comparisons, and income tiers."><meta name="robots" content="index,follow"><link rel="canonical" href="https://rankmyincome.com/methodology.html"><link rel="stylesheet" href="styles.css"></head><body><header class="site-header"><div class="container nav"><a class="brand" href="index.html">RankMy<span>Income</span></a><nav class="nav-links"><a href="index.html#tiers">Tiers</a><a href="countries/">Countries</a><a href="methodology.html">Methodology</a><a href="privacy.html">Privacy</a></nav></div></header><main class="container legal-page"><h1>Methodology</h1><p class="lead">RankMyIncome estimates where an annual income sits within a national and global distribution. The public calculator only switches out of Preview mode when its active dataset has been verified and cleared for the intended use.</p><h2>Income concept</h2><p>The planned WID.world implementation uses <code>tptinc992j</code>: the threshold of pre-tax national income for adults aged 20 and over using the equal-split-adult population concept. In plain language, the input remains approximate annual pre-tax income, but the statistical concept is broader than salary alone. The active source and data year are shown with each result.</p><h2>Country percentile</h2><p>The calculator compares the entered local-currency income with percentile thresholds for that country. Between two published thresholds, RankMyIncome uses logarithmic interpolation because income distributions are strongly skewed. Results are estimates rather than exact measurements.</p><h2>Worldwide percentile</h2><p>For the planned WID.world implementation, local income is converted with <code>xlceup999i</code>, the local-currency-per-EUR-PPP conversion used by the official 2026 comparator code, then compared with the WID world income thresholds. This accounts for purchasing-power differences rather than relying only on market exchange rates.</p><h2>Tier system</h2><p>The tier names are created by RankMyIncome for presentation and entertainment. They are not official classifications. Challenger begins at the top 0.1%, Grandmaster at top 1%, Master at top 5%, Diamond at top 10%, Emerald at top 15%, Platinum at top 25%, Gold at top 40%, Silver at top 60%, Bronze at top 80%, and Iron below that.</p><h2>Data source and reuse</h2><p>RankMyIncome keeps statistical data separate from application code. WID.world is the planned source because its distributional income data match the calculator’s intended concept. Current World Inequality Lab legal material states that open data available on its website can be used without prior authorization. Before advertising is enabled, RankMyIncome will still verify the current reuse and attribution terms and list the exact production dataset here. See <a href="https://wid.world/codes-dictionary/" rel="noopener">WID Codes Dictionary</a> and <a href="https://wid.world/methodology/" rel="noopener">WID Methodology</a>.</p><h2>Data limitations</h2><p>Income-distribution estimates can vary with survey coverage, tax data, national accounts, interpolation, extrapolation, population definitions, reference years, and other methodological choices. Country coverage may differ. Results should be treated as approximate comparisons, not financial or tax advice.</p><h2>Independence</h2><p>RankMyIncome is an independent calculator and is not operated by or endorsed by any statistical provider unless explicitly stated.</p><a class="back" href="index.html">← Back to calculator</a></main><footer class="footer"><div class="container footer-row"><span>© 2026 RankMyIncome</span><div class="footer-links"><a href="methodology.html">Methodology</a><a href="privacy.html">Privacy</a></div></div></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Methodology — RankMyIncome</title>
+  <meta name="description" content="How RankMyIncome estimates country and global income percentiles using WID.world income thresholds and purchasing-power adjustments.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://rankmyincome.com/methodology.html">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">RankMy<span>Income</span></a>
+      <nav class="nav-links">
+        <a href="index.html#tiers">Tiers</a>
+        <a href="countries/">Countries</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container legal-page">
+    <h1>Methodology</h1>
+    <p class="lead">RankMyIncome estimates where an annual pre-tax income sits within a national and worldwide income distribution using WID.world data. The current production dataset covers 208 countries and territories, with the worldwide reference distribution based on 2024 data.</p>
+
+    <h2>Income concept</h2>
+    <p>RankMyIncome uses WID.world pre-tax national-income threshold series <code>tptincj992</code> and <code>tptinc992j</code> as accepted aliases in the source data. These series describe pre-tax national income for adults aged 20 and over using the equal-split-adult population concept. This statistical concept is broader than salary alone, so a result should be treated as an estimate rather than an exact wage ranking.</p>
+
+    <h2>Country percentile</h2>
+    <p>The calculator compares the annual income entered in a country's local currency with that country's WID threshold points. Between published threshold points, RankMyIncome uses logarithmic interpolation because income distributions are highly skewed.</p>
+
+    <h2>Worldwide percentile</h2>
+    <p>For the worldwide comparison, local income is converted to a common USD purchasing-power-parity unit using the WID.world PPP conversion series <code>xlcusp999i</code> or its source alias <code>xlcuspi999</code>. The converted amount is then compared with the WID <code>WO-PPP</code> worldwide pre-tax-income threshold distribution.</p>
+
+    <h2>Values outside published thresholds</h2>
+    <p>If an income is below the lowest published threshold, RankMyIncome estimates the lower tail between zero and the first available WID point. If an income is above the highest published threshold, the calculator extrapolates from the final two available threshold points on a logarithmic scale.</p>
+    <p>Extreme results, especially very small top-percent figures such as top 0.01%, 0.001%, or 0.00001%, are extrapolated estimates rather than directly observed WID percentile thresholds. Uncertainty increases the farther a value lies outside the published data range.</p>
+
+    <h2>Tier system</h2>
+    <p>The tier names are created by RankMyIncome for presentation and entertainment and are not official statistical classifications. Challenger begins at the top 0.1%, Grandmaster at the top 1%, Master at the top 5%, Diamond at the top 10%, Emerald at the top 15%, Platinum at the top 25%, Gold at the top 40%, Silver at the top 60%, Bronze at the top 80%, and Iron below that.</p>
+
+    <h2>Data coverage and years</h2>
+    <p>The production dataset currently includes 208 countries and territories. The worldwide reference year is 2024. A country's latest usable distribution year or PPP year can differ from the worldwide reference year, and the calculator stores and displays the relevant year for each result.</p>
+
+    <h2>Data source</h2>
+    <p>Statistical data come from <a href="https://wid.world/" rel="noopener">WID.world</a>. For definitions and methodology, see the <a href="https://wid.world/codes-dictionary/" rel="noopener">WID Codes Dictionary</a> and <a href="https://wid.world/methodology/" rel="noopener">WID Methodology</a>.</p>
+
+    <h2>Limitations</h2>
+    <p>Income-distribution estimates can vary with source coverage, tax data, surveys, national accounts, interpolation, extrapolation, population definitions, and reference years. RankMyIncome is intended for approximate comparison and informational use only. It is not financial, tax, legal, or investment advice.</p>
+
+    <h2>Independence</h2>
+    <p>RankMyIncome is an independent calculator and is not operated by or endorsed by WID.world or any statistical provider.</p>
+
+    <a class="back" href="index.html">← Back to calculator</a>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <span>© 2026 RankMyIncome</span>
+      <div class="footer-links">
+        <a href="methodology.html">Methodology</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

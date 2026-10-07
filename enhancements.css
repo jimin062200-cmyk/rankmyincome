@@ -1,4 +1,5 @@
 .ad-slot--pending{display:none!important}
+.brand{display:block;width:230px;height:56px;background:url('/logo.svg') left center/contain no-repeat;font-size:0!important;line-height:0;flex:0 0 auto}.brand span{display:none!important}
 .country-data-section{margin:36px 0;padding:24px;border:1px solid #243d55;border-radius:20px;background:#0b1928}
 .country-data-section h2{font-size:1.25rem;margin:0 0 8px}
 .country-data-section p{color:#9fb0c3}
@@ -9,3 +10,4 @@
 .threshold-table tbody th{color:#dce9f4}
 .threshold-table td{color:#9fd6e7;font-weight:800}
 .country-data-note{font-size:.8rem;margin-bottom:0}
+@media(max-width:520px){.brand{width:190px;height:50px}}

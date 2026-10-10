@@ -1,0 +1,12 @@
+{
+  "headers": [
+    {
+      "source": "/",
+      "headers": [{"key":"Link","value":"<https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"en\", <https://rankmyincome.com/ko/>; rel=\"alternate\"; hreflang=\"ko\", <https://rankmyincome.com/ja/>; rel=\"alternate\"; hreflang=\"ja\", <https://rankmyincome.com/zh/>; rel=\"alternate\"; hreflang=\"zh-CN\", <https://rankmyincome.com/es/>; rel=\"alternate\"; hreflang=\"es\", <https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"x-default\""}]
+    },
+    {
+      "source": "/(ko|ja|zh|es)/",
+      "headers": [{"key":"Link","value":"<https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"en\", <https://rankmyincome.com/ko/>; rel=\"alternate\"; hreflang=\"ko\", <https://rankmyincome.com/ja/>; rel=\"alternate\"; hreflang=\"ja\", <https://rankmyincome.com/zh/>; rel=\"alternate\"; hreflang=\"zh-CN\", <https://rankmyincome.com/es/>; rel=\"alternate\"; hreflang=\"es\", <https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"x-default\""}]
+    }
+  ]
+}

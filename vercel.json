@@ -2,11 +2,11 @@
   "headers": [
     {
       "source": "/",
-      "headers": [{"key":"Link","value":"<https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"en\", <https://rankmyincome.com/ko/>; rel=\"alternate\"; hreflang=\"ko\", <https://rankmyincome.com/ja/>; rel=\"alternate\"; hreflang=\"ja\", <https://rankmyincome.com/zh/>; rel=\"alternate\"; hreflang=\"zh-CN\", <https://rankmyincome.com/es/>; rel=\"alternate\"; hreflang=\"es\", <https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"x-default\""}]
+      "headers": [{"key":"Link","value":"<https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"en\", <https://rankmyincome.com/ko/>; rel=\"alternate\"; hreflang=\"ko\", <https://rankmyincome.com/ja/>; rel=\"alternate\"; hreflang=\"ja\", <https://rankmyincome.com/zh/>; rel=\"alternate\"; hreflang=\"zh-CN\", <https://rankmyincome.com/es/>; rel=\"alternate\"; hreflang=\"es\", <https://rankmyincome.com/fr/>; rel=\"alternate\"; hreflang=\"fr\", <https://rankmyincome.com/de/>; rel=\"alternate\"; hreflang=\"de\", <https://rankmyincome.com/pt/>; rel=\"alternate\"; hreflang=\"pt-BR\", <https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"x-default\""}]
     },
     {
-      "source": "/(ko|ja|zh|es)/",
-      "headers": [{"key":"Link","value":"<https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"en\", <https://rankmyincome.com/ko/>; rel=\"alternate\"; hreflang=\"ko\", <https://rankmyincome.com/ja/>; rel=\"alternate\"; hreflang=\"ja\", <https://rankmyincome.com/zh/>; rel=\"alternate\"; hreflang=\"zh-CN\", <https://rankmyincome.com/es/>; rel=\"alternate\"; hreflang=\"es\", <https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"x-default\""}]
+      "source": "/(ko|ja|zh|es|fr|de|pt)/",
+      "headers": [{"key":"Link","value":"<https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"en\", <https://rankmyincome.com/ko/>; rel=\"alternate\"; hreflang=\"ko\", <https://rankmyincome.com/ja/>; rel=\"alternate\"; hreflang=\"ja\", <https://rankmyincome.com/zh/>; rel=\"alternate\"; hreflang=\"zh-CN\", <https://rankmyincome.com/es/>; rel=\"alternate\"; hreflang=\"es\", <https://rankmyincome.com/fr/>; rel=\"alternate\"; hreflang=\"fr\", <https://rankmyincome.com/de/>; rel=\"alternate\"; hreflang=\"de\", <https://rankmyincome.com/pt/>; rel=\"alternate\"; hreflang=\"pt-BR\", <https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"x-default\""}]
     }
   ]
 }

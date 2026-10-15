@@ -1,5 +1,6 @@
 /* Browser-only UI. Calculation definitions live in calculator-core.js. */
 'use strict';
+(() => {
 const M=globalThis.RankMath, $=s=>document.querySelector(s);
 const TXT=JSON.parse($('#ui-strings').textContent), LANG=document.documentElement.lang;
 const ACTIVE=document.body.dataset.locale, HOME=ACTIVE==='en'?'/':`/${ACTIVE}/`;
@@ -209,3 +210,4 @@ $('#share-result').addEventListener('click',shareResult);$('#copy-result').addEv
 $('#forget-result').addEventListener('click',()=>{try{localStorage.removeItem(STORE);renderSaved();$('#share-status').textContent=t('savedEmpty');$('#income').focus();}catch{$('#saved-change').textContent=t('storageError');}});
 $('#retry-data').addEventListener('click',loadData);
 loadData();
+})();

@@ -10,7 +10,7 @@ async function setup(lang='en',{failIndex=false,denyStorage=false}={}){
  let reject=failIndex;
  w.fetch=async url=>{calls.push(url);if(reject&&url.endsWith('/index.json')){reject=false;throw Error('Network');}return {ok:true,json:async()=>JSON.parse(fs.readFileSync('dist'+url,'utf8'))};};
  if(denyStorage){w.Storage.prototype.getItem=()=>{throw Error('Denied')};w.Storage.prototype.setItem=()=>{throw Error('Denied')};}
- for(const f of ['site.js','calculator-core.js','app.js'])w.eval(fs.readFileSync(f,'utf8'));
+ for(const f of ['site.js','calculator-core.js','app.js'])require('node:vm').runInContext(fs.readFileSync(f,'utf8'),dom.getInternalVMContext(),{filename:f});
  await ready(()=>!q('#calculate').disabled||!q('#retry-data').hidden);
  return {w,q,calls,close:()=>w.close(),input:value=>{q('#income').value=value;q('#income').dispatchEvent(new w.Event('input',{bubbles:true}));},submit:async()=>{q('#income-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await ready(()=>!q('#calculate').disabled);}};
 }

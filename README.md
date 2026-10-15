@@ -1,59 +1,57 @@
 # RankMyIncome
 
-Static, browser-only income percentile calculator prototype.
+A static, browser-only WID income percentile calculator. The original dark design, tier system, forward percentile calculation and production dataset are preserved.
 
-## Current state
+## Development and deployment
 
-- Searchable country picker
-- Country and worldwide percentile cards
-- RankMyIncome tiers from Iron to Challenger
-- Original CSS tier emblems (no game artwork/assets)
-- Share / copy result without including the entered income amount
-- Auto-generated country landing pages for SEO/discovery
-- Methodology, Privacy, robots.txt, and sitemap.xml
-- Statistical data separated into `data/income-data.json`
-- Preview safety gate: non-production data always displays PREVIEW
+Use Node 22, then:
 
-## Local preview
-
-```bash
-python -m http.server 8765
+```sh
+npm ci --ignore-scripts
+npm run check
+npm run serve
 ```
 
-Then open `http://localhost:8765/`.
+Open `http://127.0.0.1:8765`. **Serve `dist/`, not the repository root.** The root's previously generated HTML files remain as historical source references; they are not deployment inputs. Current pages are generated from `templates/home.html`, `locales/*.json`, the editorial `.html` pages and the unchanged WID dataset.
 
-## Validate data
+Vercel reads `vercel.json`, runs `npm run check`, and serves only `dist/`. No framework, server functions, database, credentials or paid service is needed. Existing `/`, language home URLs, `/countries/<slug>/` and editorial `.html` URLs are retained. Unknown paths return a real 404, without an SPA fallback.
 
-```bash
-python scripts/validate_income_data.py data/income-data.json
+GitHub Actions performs the same calculation/build/link checks plus Chromium and mobile WebKit tests. It uploads browser reports, screenshots and the tested static build. It never commits generated files or requires repository write permission. Vercel's existing Git integration handles previews and production deployments; Actions does not need a Vercel token.
+
+## Features
+
+- 208 countries/territories and 8 complete calculator languages; localized country pages and directories
+- National and purchasing-power-adjusted world ranks, original Iron–Challenger tier cards
+- Next-tier and target-percentile incomes, including monthly equivalents
+- Same-percentile income comparison in each country's own currency (not a relocation or exchange-rate estimate)
+- Share/copy result and locally rendered PNG card, excluding the entered income amount
+- Optional saved rank on this browser, with deletion and same-dataset rank comparison; no income amount is saved
+- Keyboard country picker, mobile navigation, reduced motion, live errors and country search
+- Self-canonicals, reciprocal language links, structured data, sitemap, source attribution, contact/privacy/methodology pages
+- Versioned and cached split data payloads; national thresholds load on demand
+
+## Tests
+
+```sh
+npm test                  # 103,272 legacy comparisons plus inverse/PPP/input checks
+npm run check             # calculation, build, page/link/data and 8-language DOM checks
+npx playwright install --with-deps chromium webkit
+npm run test:browser       # desktop/mobile flows, accessibility, errors, saving, sharing
+npm run test:dom           # executable UI regression without a rendering engine
 ```
 
-## Regenerate country pages and sitemap
+The forward-calculation fixture is the original `app.js` at commit `c8842468c78c6ba5bf176b1ebfe70ab70ec8f9f9`. `tests/fixtures/dataset.sha256` intentionally locks the current dataset. A future data refresh must review/update this baseline, source verification and the page-count expectations if coverage changes. Never silently bless an unverified dataset.
 
-Whenever countries are added or renamed in `data/income-data.json`:
+## WID data refresh
 
-```bash
-python scripts/generate_country_pages.py
-```
+The existing Python import/source-match tools remain available:
 
-This rebuilds `countries/` and `sitemap.xml` from the active data file.
-
-## Production data gate
-
-Do not change `meta.status` to `production` until the active statistical dataset has been verified, the percentile/PPP transformations have been tested, and its license permits the intended site use (including advertising if monetized).
-
-See `DATA_POLICY.md`.
-
-## Build from official WID bulk data
-
-From the project root on a machine with internet access:
-
-```bash
+```sh
 python scripts/fetch_wid_bulk.py --core
 python scripts/import_wid_bulk.py wid-source -o data/income-data.json
 python scripts/validate_income_data.py data/income-data.json
-python scripts/generate_country_pages.py
+python scripts/verify_wid_source_match.py --help
+npm run check
 ```
 
-Keep the dataset in Preview until the source/licensing/quality review is complete. Only pass
-`--production` to `import_wid_bulk.py` once that review is complete.
+Only enable production status after the documented source/licensing checks. See `DATA_POLICY.md` and `docs/UPGRADE_AUDIT.md`. The legacy country-generation entrypoint now delegates to the single current build; there is no second sitemap pipeline.

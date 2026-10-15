@@ -1,51 +1,42 @@
-name: Regenerate static pages
-
+name: Validate and build site
 on:
   push:
-    branches: [main]
-    paths:
-      - "data/income-data.json"
-      - "scripts/generate_country_pages.py"
-      - "scripts/generate_social_card.py"
-      - ".github/workflows/regenerate-static-pages.yml"
+    branches: [main, 'upgrade/**']
+  pull_request:
   workflow_dispatch:
-
 permissions:
-  contents: write
-
+  contents: read
+concurrency:
+  group: site-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  regenerate:
+  validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          python-version: "3.13"
-
-      - name: Validate production data
-        run: python scripts/validate_income_data.py data/income-data.json
-
-      - name: Generate country pages and sitemap
-        run: python scripts/generate_country_pages.py
-
-      - name: Install social-card dependency
-        run: python -m pip install --disable-pip-version-check pillow
-
-      - name: Generate social share card
-        run: python scripts/generate_social_card.py
-
-      - name: Commit generated files
-        shell: bash
-        run: |
-          if git diff --quiet -- countries sitemap.xml social-card.png; then
-            echo "Generated files are already current."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add countries sitemap.xml social-card.png
-          git commit -m "Regenerate static country pages"
-          git push
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - name: Install test browsers
+        run: npx playwright install --with-deps chromium webkit
+      - name: Desktop, mobile and accessibility regression
+        run: npm run test:browser
+      - name: Store browser report and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-regression
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
+      - name: Store tested static build
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist/
+          retention-days: 7

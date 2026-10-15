@@ -3,3 +3,7 @@ wid-source/
 __pycache__/
 *.pyc
 *.part
+node_modules/
+dist/
+test-results/
+playwright-report/

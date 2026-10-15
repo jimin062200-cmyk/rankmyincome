@@ -1,6 +1,6 @@
 # RankMyIncome upgrade audit
 
-Prepared 2026-10-12. Baseline: `c8842468c78c6ba5bf176b1ebfe70ab70ec8f9f9` in the existing public `jimin062200-cmyk/rankmyincome` repository.
+Prepared 2026-10-12; release verification updated 2026-10-15. Baseline: `c8842468c78c6ba5bf176b1ebfe70ab70ec8f9f9` in the existing public `jimin062200-cmyk/rankmyincome` repository.
 
 ## Current delivery status
 
@@ -8,7 +8,7 @@ Implementation is published in [PR #1](https://github.com/jimin062200-cmyk/rankm
 
 The [browser regression run](https://github.com/jimin062200-cmyk/rankmyincome/actions/runs/38670299065) passed all **34 Chromium / mobile WebKit tests**, including eight-language calculation flows, 320/375/768/1280px overflow, axe WCAG A/AA checks, sharing, saving, recovery and no-JavaScript navigation. Initial browser testing caught a global `top` name collision that DOM emulation did not catch; app initialization is now isolated in its own scope. CI artifacts include mobile/desktop screenshots. Final screenshot review prompted explicit dark native form controls and separate screenshot paths per browser.
 
-Vercel's GitHub integration successfully built previews. Direct protected-preview inspection is blocked by the connector's team-scope 403, and no authenticated Vercel CLI is available. Deployment Protection was not weakened. Production routing and commit verification must be checked after merging. No field Core Web Vitals or advertising approval is claimed.
+Vercel's GitHub integration successfully built previews. Direct protected-preview inspection is blocked by the connector's team-scope 403, and no authenticated Vercel CLI is available. Deployment Protection was not weakened. Production release `542da07d4836f50cbd05e25874e53800f01583ca` was subsequently confirmed through the actual domain: eight language homes, country pages, canonical/hreflang tags, robots/sitemap/ads.txt, permanent index redirect, real 404 and immutable asset/data responses passed. [Main CI](https://github.com/jimin062200-cmyk/rankmyincome/actions/runs/38670963896) also passed. A subsequent read-only production verification job now makes these checks repeatable after every validated main push. No field Core Web Vitals or advertising approval is claimed.
 
 ## What was preserved
 

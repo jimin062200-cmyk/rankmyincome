@@ -40,3 +40,24 @@ jobs:
           name: site-dist
           path: dist/
           retention-days: 7
+  production:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Verify the actual production deployment
+        run: node scripts/verify-production.mjs
+      - name: Store production verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-verification
+          path: test-results/production-verification.json
+          retention-days: 30

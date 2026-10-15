@@ -42,6 +42,16 @@ npm run test:dom           # executable UI regression without a rendering engine
 
 The forward-calculation fixture is the original `app.js` at commit `c8842468c78c6ba5bf176b1ebfe70ab70ec8f9f9`. `tests/fixtures/dataset.sha256` intentionally locks the current dataset. A future data refresh must review/update this baseline, source verification and the page-count expectations if coverage changes. Never silently bless an unverified dataset.
 
+## Production verification
+
+After a `main` push passes the browser suite, CI waits for that exact commit on the public domain and checks all eight language homes, directories and a country page, canonicals, language alternates, noindex directives, sitemap, ads.txt, permanent index redirect, real 404 and immutable assets/data. The read-only checker uses no Vercel secret and never changes protection or advertising settings. Its JSON evidence is retained as the `production-verification` Actions artifact. A failure reports a deployment problem; it does not automatically roll back.
+
+To check an already deployed, reviewed commit manually:
+
+```sh
+EXPECTED_COMMIT=<full-40-character-commit> node scripts/verify-production.mjs
+```
+
 ## WID data refresh
 
 The existing Python import/source-match tools remain available:

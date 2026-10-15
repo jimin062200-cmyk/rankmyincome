@@ -4,11 +4,11 @@ Prepared 2026-10-12. Baseline: `c8842468c78c6ba5bf176b1ebfe70ab70ec8f9f9` in the
 
 ## Current delivery status
 
-Implementation and local calculation, build, static-link, locale and DOM interaction checks are complete. The work is on local branch `upgrade/service-quality`.
+Implementation is published in [PR #1](https://github.com/jimin062200-cmyk/rankmyincome/pull/1), following the user's explicit continuation approval on 2026-10-15. The authenticated GitHub connector published the exact reviewed file tree because Git CLI authentication was unavailable.
 
-**Not published:** automatic approval review rejected pushing the branch, including a narrowed attempt after verifying the repository and checking the changes for credentials. Its stated reason was that explicit permission to publish to this specific GitHub repository was missing. No alternate upload or deployment route was used to bypass that decision. The existing production deployment has not been updated by this work.
+The [browser regression run](https://github.com/jimin062200-cmyk/rankmyincome/actions/runs/38670299065) passed all **34 Chromium / mobile WebKit tests**, including eight-language calculation flows, 320/375/768/1280px overflow, axe WCAG A/AA checks, sharing, saving, recovery and no-JavaScript navigation. Initial browser testing caught a global `top` name collision that DOM emulation did not catch; app initialization is now isolated in its own scope. CI artifacts include mobile/desktop screenshots. Final screenshot review prompted explicit dark native form controls and separate screenshot paths per browser.
 
-The Chromium / mobile WebKit suite and GitHub Actions workflow are implemented, but have **not run**. No local browser-control capability compatible with this environment was available, and remote CI requires the blocked push. No claim is made that actual mobile rendering, axe browser results, Core Web Vitals or a new Vercel deployment has passed. These remain the final release gate after permission to publish the branch.
+Vercel's GitHub integration successfully built previews. Direct protected-preview inspection is blocked by the connector's team-scope 403, and no authenticated Vercel CLI is available. Deployment Protection was not weakened. Production routing and commit verification must be checked after merging. No field Core Web Vitals or advertising approval is claimed.
 
 ## What was preserved
 
@@ -58,7 +58,7 @@ The main calculator still asks only for country and annual pre-tax income. All e
 - Canonical uniqueness, reciprocal 8-language alternates, valid structured data, social metadata and absence of static fake result numbers.
 - Eleven executable DOM test cases: all 8 languages, results/targets/comparison, local save/delete, invalid input, retry, blocked storage, sharing/clipboard errors and a late-response race.
 
-The browser suite separately defines Chromium and mobile WebKit flows, 320/375/768/1280px overflow checks, axe accessibility checks, PNG download, local save/reload/delete, no-JavaScript country pages and 404 routing. These are prepared but unexecuted; DOM tests do not establish visual correctness.
+The browser suite separately defines Chromium and mobile WebKit flows, 320/375/768/1280px overflow checks, axe accessibility checks, PNG download, local save/reload/delete, no-JavaScript country pages and 404 routing. All 34 browser tests passed in the linked CI run; screenshots were inspected separately. Automated accessibility checks are not a complete manual accessibility audit.
 
 ## AdSense and indexing status
 
@@ -70,7 +70,7 @@ Technical indexability is checked, but indexing decisions and Search Console cov
 
 ## Release and rollback
 
-After explicit approval for this repository:
+Authorized release sequence (approval received 2026-10-15):
 
 1. Push `upgrade/service-quality` and open a reviewable PR to `main`.
 2. Run the configured GitHub Actions suite and Vercel preview. Resolve browser/test/deployment failures before merging.

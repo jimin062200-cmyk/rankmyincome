@@ -23,14 +23,14 @@ for(const lang of Object.keys(inputs))test(`${lang}: real calculation, targets, 
  expect(await page.locator('[data-language-link]').evaluateAll(xs=>xs.every(a=>new URL(a.href).searchParams.get('country')==='SG'))).toBe(true);
  expect(errors).toEqual([]);
 });
-for(const width of [320,375,768,1280])test(`responsive ${width}px and accessible calculator`,async({page})=>{
+for(const width of [320,375,768,1280])test(`responsive ${width}px and accessible calculator`,async({page},testInfo)=>{
  await page.setViewportSize({width,height:850});await page.goto('/ko/?country=KR');await expect(page.locator('#calculate')).toBeEnabled();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
  if(width<1100){await expect(page.locator('.mobile-nav')).toBeVisible();await page.locator('.mobile-nav summary').click();await expect(page.locator('.mobile-nav .nav-links')).toBeVisible();await page.keyboard.press('Escape');}
  await page.locator('#income').fill('50000000');await page.locator('#calculate').click();await expect(page.locator('#results')).toBeVisible();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
  const a11y=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(a11y.violations).toEqual([]);
- if(width===375||width===1280)await page.screenshot({path:`test-results/ko-${width}.png`,fullPage:true});
+ if(width===375||width===1280){await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo({top:0,behavior:'instant'});});await page.screenshot({path:testInfo.outputPath(`ko-${width}.png`),fullPage:true});}
 });
 test('privacy: saving, reload and removal work without persisting the income amount',async({page})=>{
  await page.goto('/?country=KR');await expect(page.locator('#calculate')).toBeEnabled();await expect(page.locator('#saved-section')).toBeHidden();

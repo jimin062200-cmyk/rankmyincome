@@ -1,0 +1,22 @@
+{
+  "name": "rankmyincome",
+  "version": "2.0.0",
+  "private": true,
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "build": "node scripts/build-site.mjs",
+    "test": "node --test tests/calculator.test.cjs",
+    "check:site": "node --test tests/site.test.mjs",
+    "check": "npm test && npm run build && npm run check:site && npm run test:dom",
+    "test:browser": "playwright test",
+    "serve": "node scripts/serve.mjs",
+    "test:dom": "node --test tests/dom.test.cjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@playwright/test": "1.56.1",
+    "jsdom": "26.1.0"
+  }
+}

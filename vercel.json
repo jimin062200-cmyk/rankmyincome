@@ -1,12 +1,25 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run check",
+  "outputDirectory": "dist",
+  "installCommand": "npm ci --ignore-scripts",
+  "cleanUrls": false,
+  "trailingSlash": true,
   "headers": [
-    {
-      "source": "/",
-      "headers": [{"key":"Link","value":"<https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"en\", <https://rankmyincome.com/ko/>; rel=\"alternate\"; hreflang=\"ko\", <https://rankmyincome.com/ja/>; rel=\"alternate\"; hreflang=\"ja\", <https://rankmyincome.com/zh/>; rel=\"alternate\"; hreflang=\"zh-CN\", <https://rankmyincome.com/es/>; rel=\"alternate\"; hreflang=\"es\", <https://rankmyincome.com/fr/>; rel=\"alternate\"; hreflang=\"fr\", <https://rankmyincome.com/de/>; rel=\"alternate\"; hreflang=\"de\", <https://rankmyincome.com/pt/>; rel=\"alternate\"; hreflang=\"pt-BR\", <https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"x-default\""}]
-    },
-    {
-      "source": "/(ko|ja|zh|es|fr|de|pt)/",
-      "headers": [{"key":"Link","value":"<https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"en\", <https://rankmyincome.com/ko/>; rel=\"alternate\"; hreflang=\"ko\", <https://rankmyincome.com/ja/>; rel=\"alternate\"; hreflang=\"ja\", <https://rankmyincome.com/zh/>; rel=\"alternate\"; hreflang=\"zh-CN\", <https://rankmyincome.com/es/>; rel=\"alternate\"; hreflang=\"es\", <https://rankmyincome.com/fr/>; rel=\"alternate\"; hreflang=\"fr\", <https://rankmyincome.com/de/>; rel=\"alternate\"; hreflang=\"de\", <https://rankmyincome.com/pt/>; rel=\"alternate\"; hreflang=\"pt-BR\", <https://rankmyincome.com/>; rel=\"alternate\"; hreflang=\"x-default\""}]
-    }
+    {"source":"/(.*)","headers":[
+      {"key":"X-Content-Type-Options","value":"nosniff"},
+      {"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"},
+      {"key":"Permissions-Policy","value":"camera=(), microphone=(), geolocation=()"}
+    ]},
+    {"source":"/assets/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
+    {"source":"/data/:version/:file", "headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
+    {"source":"/data/income-data.json","headers":[{"key":"Cache-Control","value":"public, max-age=0, must-revalidate"}]},
+    {"source":"/sitemap.xml","headers":[{"key":"Cache-Control","value":"public, max-age=0, must-revalidate"}]}
+  ],
+  "redirects": [
+    {"source":"/index.html","destination":"/","permanent":true},
+    {"source":"/:language(ko|ja|zh|es|fr|de|pt)/index.html","destination":"/:language/","permanent":true},
+    {"source":"/countries/:country/index.html","destination":"/countries/:country/","permanent":true}
   ]
 }

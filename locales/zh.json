@@ -1,4 +1,7 @@
 {
+  "calculatorTitle": "查看你的收入排名",
+  "coverageLabel": "国家和地区",
+  "languagesLabel": "支持语言",
   "title": "我的收入位于前百分之几？— RankMyIncome 收入百分位计算器",
   "description": "输入年度税前收入，估算您在本国及全球收入分布中的百分位和收入等级。",
   "hero": "<section class=\"hero\"><div class=\"container\"><div class=\"eyebrow\">收入百分位计算器</div><h1>您的收入位于<em>前百分之几？</em></h1><p>将年度税前收入与本国成年人和全球收入分布进行比较，并查看游戏风格的收入等级。</p></div></section>",

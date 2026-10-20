@@ -1,6 +1,8 @@
 <main id="main">
+<div class="landing-grid container">
 {{hero}}
 <section class="calculator-wrap"><div class="container"><form id="income-form" class="calculator" novalidate>
+<div class="calculator-heading"><span class="calculator-icon" aria-hidden="true">↗</span><h2>{{calculatorTitle}}</h2><p>{{resultIntro}}</p></div>
 <div id="preview-banner" class="preview-banner" role="status"></div>
 <div class="form-grid"><div class="field"><label for="country-trigger">{{country}}</label>
 <div class="country-picker"><input id="country" type="hidden"><button id="country-trigger" class="country-trigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="country-menu" disabled><span id="country-trigger-label">{{loading}}</span><span aria-hidden="true">⌄</span></button>
@@ -9,6 +11,8 @@
 <p class="hint">{{currencyNote}}</p><button id="calculate" type="submit" class="calculate" disabled>{{loading}}</button><p id="error" class="error" role="alert"></p><button id="retry-data" class="ghost-action" type="button" hidden>{{retry}}</button>
 <noscript><p>{{noScript}} <a href="{{home}}countries/">{{browse}}</a></p></noscript>
 </form></div></section>
+</div>
+<div class="trust-strip container"><div><strong>{{countryCount}}</strong><span>{{coverageLabel}}</span></div><div><strong>{{languageCount}}</strong><span>{{languagesLabel}}</span></div><div><strong>WID.world</strong><span>{{source}}</span></div></div>
 <section id="saved-section" class="container saved-panel" hidden aria-labelledby="saved-title"><h2 id="saved-title">{{savedTitle}}</h2><p id="saved-result"></p><p id="saved-change"></p><button id="forget-result" class="ghost-action" type="button">{{forget}}</button></section>
 <section id="results" class="results-section" hidden aria-labelledby="result-title" tabindex="-1"><div class="container">
 <div class="section-title"><h2 id="result-title">{{resultTitle}}</h2><p>{{resultIntro}}</p><p id="result-data" class="hint"></p></div>

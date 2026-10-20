@@ -1,4 +1,7 @@
 {
+  "calculatorTitle": "Découvrez votre classement",
+  "coverageLabel": "Pays et territoires",
+  "languagesLabel": "Langues",
   "title": "Dans quel percentile se situe votre revenu ? — RankMyIncome",
   "description": "Saisissez votre revenu annuel avant impôts pour estimer votre percentile de revenu dans votre pays et dans le monde.",
   "hero": "<section class=\"hero\"><div class=\"container\"><div class=\"eyebrow\">Calculateur de percentile de revenu</div><h1>Où se situe <em>votre revenu ?</em></h1><p>Comparez votre revenu annuel avant impôts à celui des adultes de votre pays et du monde, puis découvrez votre niveau de revenu.</p></div></section>",

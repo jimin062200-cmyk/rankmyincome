@@ -1,4 +1,7 @@
 {
+  "calculatorTitle": "Einkommensrang berechnen",
+  "coverageLabel": "Länder und Gebiete",
+  "languagesLabel": "Sprachen",
   "title": "Zu welchem Einkommensperzentil gehörst du? — RankMyIncome",
   "description": "Gib dein jährliches Bruttoeinkommen ein und schätze dein Einkommensperzentil im eigenen Land und weltweit.",
   "hero": "<section class=\"hero\"><div class=\"container\"><div class=\"eyebrow\">Einkommensperzentil-Rechner</div><h1>Wo liegt <em>dein Einkommen?</em></h1><p>Vergleiche dein jährliches Bruttoeinkommen mit Erwachsenen in deinem Land und weltweit und erhalte eine Einkommensstufe.</p></div></section>",

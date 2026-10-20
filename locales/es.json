@@ -1,4 +1,7 @@
 {
+  "calculatorTitle": "Descubre tu posición",
+  "coverageLabel": "Países y territorios",
+  "languagesLabel": "Idiomas",
   "title": "¿En qué percentil están tus ingresos? — RankMyIncome",
   "description": "Introduce tus ingresos anuales antes de impuestos para estimar tu percentil de ingresos en tu país y en el mundo.",
   "hero": "<section class=\"hero\"><div class=\"container\"><div class=\"eyebrow\">Calculadora de percentil de ingresos</div><h1>¿En qué posición están <em>tus ingresos?</em></h1><p>Compara tus ingresos anuales antes de impuestos con los adultos de tu país y del mundo y descubre tu nivel de ingresos.</p></div></section>",

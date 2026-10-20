@@ -1,4 +1,7 @@
 {
+  "calculatorTitle": "Find your income rank",
+  "coverageLabel": "Countries & territories",
+  "languagesLabel": "Languages",
   "title": "RankMyIncome — Income Percentile & Global Rank Calculator",
   "description": "Enter your annual income to estimate your income percentile, country rank, global rank, and tier from Iron to Challenger.",
   "hero": "<section class=\"hero\"><div class=\"container\"><div class=\"eyebrow\">Income percentile calculator</div><h1>Where does your income <em>rank?</em></h1><p>Compare your annual pre-tax income with adults in your country and worldwide, then get a game-style income tier.</p></div></section>\n",

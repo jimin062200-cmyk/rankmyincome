@@ -63,3 +63,19 @@ test('no-JavaScript navigation and country thresholds remain useful',async({brow
  const context=await browser.newContext({javaScriptEnabled:false});const page=await context.newPage();await page.route('**/pagead2.googlesyndication.com/**',route=>route.abort());
  await page.goto('http://127.0.0.1:8765/ja/');await expect(page.locator('noscript')).toBeVisible();await page.goto('http://127.0.0.1:8765/ja/countries/japan/');await expect(page.locator('table tbody tr')).toHaveCount(6);await context.close();
 });
+test('redesigned home and country pages fit all eight languages at 320px',async({page})=>{
+ await page.setViewportSize({width:320,height:850});
+ for(const lang of Object.keys(inputs)){
+  const root=lang==='en'?'/':`/${lang}/`;
+  for(const route of [root,`${root}countries/south-korea/`]){
+   await page.goto(route);
+   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),route).toBe(true);
+   await expect(page.locator('h1')).toBeVisible();
+  }
+ }
+});
+for(const width of [375,1280])test(`redesigned country page ${width}px is accessible`,async({page},testInfo)=>{
+ await page.setViewportSize({width,height:850});await page.goto('/ko/countries/south-korea/');
+ const a11y=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(a11y.violations).toEqual([]);
+ await page.screenshot({path:testInfo.outputPath(`country-${width}.png`),fullPage:true});
+});

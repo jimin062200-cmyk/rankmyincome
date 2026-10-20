@@ -1,4 +1,7 @@
 {
+  "calculatorTitle": "Descubra sua posição",
+  "coverageLabel": "Países e territórios",
+  "languagesLabel": "Idiomas",
   "title": "Em qual percentil está sua renda? — RankMyIncome",
   "description": "Informe sua renda anual antes dos impostos para estimar seu percentil de renda no seu país e no mundo.",
   "hero": "<section class=\"hero\"><div class=\"container\"><div class=\"eyebrow\">Calculadora de percentil de renda</div><h1>Onde sua <em>renda se posiciona?</em></h1><p>Compare sua renda anual antes dos impostos com adultos do seu país e do mundo e descubra seu nível de renda.</p></div></section>",

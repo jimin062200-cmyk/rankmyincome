@@ -1,4 +1,7 @@
 {
+  "calculatorTitle": "내 소득 순위 확인하기",
+  "coverageLabel": "국가·지역",
+  "languagesLabel": "지원 언어",
   "title": "내 소득은 상위 몇 %일까? — RankMyIncome 소득 백분위 계산기",
   "description": "연간 세전 소득을 입력해 한국 및 전 세계에서 내 소득이 상위 몇 퍼센트인지 추정하고 소득 티어를 확인하세요.",
   "hero": "<section class=\"hero\"><div class=\"container\"><div class=\"eyebrow\">소득 백분위 계산기</div><h1>내 소득은 <em>상위 몇 %</em>일까?</h1><p>연간 세전 소득을 같은 국가의 성인 및 전 세계와 비교하고 게임 스타일의 소득 티어를 확인하세요.</p></div></section>\n",

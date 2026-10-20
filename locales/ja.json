@@ -1,4 +1,7 @@
 {
+  "calculatorTitle": "所得順位を確認する",
+  "coverageLabel": "国・地域",
+  "languagesLabel": "対応言語",
   "title": "あなたの年収は上位何％？ — RankMyIncome 所得パーセンタイル計算",
   "description": "年間の税引前所得を入力して、自国と世界で上位何％に入るかを推定し、所得ティアを確認できます。",
   "hero": "<section class=\"hero\"><div class=\"container\"><div class=\"eyebrow\">所得パーセンタイル計算</div><h1>あなたの所得は<em>上位何％？</em></h1><p>年間の税引前所得を自国の成人および世界全体と比較し、ゲーム風の所得ティアを確認できます。</p></div></section>\n",

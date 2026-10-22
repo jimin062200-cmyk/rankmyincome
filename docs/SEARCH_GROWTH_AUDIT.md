@@ -131,3 +131,14 @@ Remaining limitations: actual Search Console/AdSense account status was not acce
 - [AdSense eligibility and original content](https://support.google.com/adsense/answer/9724?hl=en)
 - [Vercel deployments](https://vercel.com/docs/deployments)
 - [Project code and source history](https://github.com/jimin062200-cmyk/rankmyincome)
+
+
+## CI installation timeout follow-up — 22 October 2026
+
+[PR run 39793860063](https://github.com/jimin062200-cmyk/rankmyincome/actions/runs/39793860063) reached the 15-minute job limit while installing test browsers. The log identifies Ubuntu 24.04.5, not Ubuntu 26. Package installation ran from approximately 14:14:35 UTC to 14:29:11 UTC; browser downloads began only seconds before cancellation. No browser test executed in that run. Missing report files were a consequence, and the Node 20 action warning was separate.
+
+CI now uses the official Playwright 1.56.1 Noble image, pinned by registry digest and matched to the existing npm version. It contains browser binaries and OS dependencies, removing the per-run apt/download step. Ubuntu 24.04 is explicitly selected; checkout/setup-node/upload-artifact use verified Node 24 action releases pinned by commit. Application Node remains 22. The 15-minute job limit, full check suite, Chromium/mobile WebKit suite and production verification gate remain. An explicit version assertion and two-browser launch check fail early on an image mismatch. Report uploads require actual report files.
+
+The earlier WebKit issue was addressed in feeae357: unchanged delayed form change events no longer invalidate submissions, with a dedicated DOM regression, and long mobile screenshots use CSS pixel scale to avoid WebKit's 32767-pixel bitmap limit. All 21 growth Chromium tests and the full non-browser suite passed locally after that fix. Full CI and production release evidence must still be verified after the CI change.
+
+References: [Playwright CI](https://playwright.dev/docs/ci), [Playwright Docker](https://playwright.dev/docs/docker), and the linked failed run.

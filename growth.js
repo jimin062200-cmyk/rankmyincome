@@ -24,8 +24,10 @@
  function rank(amount,c,code,label){const ct=M.topPercent(amount,c.thresholds),wt=M.topPercent(amount/c.pppPerWorldUnit,catalog.world.thresholds);stats([[label+' · '+names.of(code),top(ct)+' · '+M.getTier(ct).name],[label+' · '+d.world,top(wt)+' · '+M.getTier(wt).name]]);if(M.outsideRange(amount,c.thresholds)||M.outsideRange(amount/c.pppPerWorldUnit,catalog.world.thresholds))output.append(node('p',d.extrapolated,'range-note'));}
  function currency(){const c=catalog?.countries[$('#tool-country').value];if(c)$('#tool-currency').textContent=`${c.currency} · ${d.currencyNote}`;}
  function links(code){const area=node('div',undefined,'growth-links');for(const [path,label] of [[`${home}?country=${code}`,g.rankLink],[`${home}countries/${catalog.countries[code].slug}/`,d.browse],[`${home}tools/income-goal/?country=${code}`,g.incomeGoal],[`${home}tools/income-distribution/?country=${code}`,g.distribution]]){const a=node('a',label+' →');a.href=path;area.append(a);}output.append(node('p',g.handoffNote,'hint'),area);}
- function invalidate(){revision++;output.replaceChildren();error('');currency();$('#tool-submit').disabled=!catalog;$('#tool-submit').textContent=d.calculate;}
- async function calculate(event){event?.preventDefault();if(!catalog)return;const seq=++revision;output.replaceChildren();error('');const code=$('#tool-country').value,amount=$('#tool-income')?M.parseMoney($('#tool-income').value,lang):0;
+ let formState;
+ function state(){return JSON.stringify([...form.elements].filter(el=>el.name).map(el=>[el.name,el.value]));}
+ function invalidate(){const next=state();if(next===formState)return;formState=next;revision++;output.replaceChildren();error('');currency();$('#tool-submit').disabled=!catalog;$('#tool-submit').textContent=d.calculate;}
+ async function calculate(event){event?.preventDefault();if(!catalog)return;formState=state();const seq=++revision;output.replaceChildren();error('');const code=$('#tool-country').value,amount=$('#tool-income')?M.parseMoney($('#tool-income').value,lang):0;
   if($('#tool-income')&&(!Number.isFinite(amount)||amount<0||(['raise-calculator','income-goal'].includes(kind)&&amount===0))){error(g.invalid);$('#tool-income').focus();return;}
   for(const input of form.querySelectorAll('input[type=number]')){if(!input.value||!input.checkValidity()){error(g.invalid);input.focus();return;}}
   $('#tool-submit').disabled=true;$('#tool-submit').textContent=d.loading;

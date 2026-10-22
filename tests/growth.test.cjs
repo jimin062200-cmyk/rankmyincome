@@ -32,3 +32,15 @@ test('new tools reject negative income and recover from a missing data response'
 test('rankings retain all static rows, filter no matches and sort numerically',async()=>{
  const dom=await page('/rankings/top-1-income/'),w=dom.window,doc=w.document,search=doc.querySelector('#ranking-search');assert.equal(doc.querySelectorAll('tbody tr').length,208);search.value='South Korea';search.dispatchEvent(new w.Event('input'));assert.equal([...doc.querySelectorAll('tbody tr')].filter(r=>!r.hidden).length,1);search.value='xxxx-no-country';search.dispatchEvent(new w.Event('input'));assert.equal([...doc.querySelectorAll('tbody tr')].filter(r=>!r.hidden).length,0);search.value='';search.dispatchEvent(new w.Event('input'));const sort=doc.querySelector('#ranking-sort');sort.value='asc';sort.dispatchEvent(new w.Event('change'));const rows=[...doc.querySelectorAll('tbody tr')];assert.ok(Number(rows[0].dataset.value)<=Number(rows.at(-1).dataset.value));w.close();
 });
+
+test('a delayed unchanged change event cannot erase a submitted result',async()=>{
+ const dom=await page('/tools/salary-converter/'),w=dom.window,doc=w.document;
+ const input=doc.querySelector('#tool-income');input.value='25';input.dispatchEvent(new w.Event('input',{bubbles:true}));
+ doc.querySelector('#tool-period').value='hourly';
+ doc.querySelector('#tool-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));
+ input.dispatchEvent(new w.Event('change',{bubbles:true}));
+ await wait(()=>doc.querySelector('#tool-result').textContent.includes('52,000'));
+ input.dispatchEvent(new w.Event('change',{bubbles:true}));
+ assert.ok(doc.querySelector('#tool-result').textContent.includes('52,000'));
+ input.value='30';input.dispatchEvent(new w.Event('input',{bubbles:true}));assert.equal(doc.querySelector('#tool-result').textContent,'');w.close();
+});

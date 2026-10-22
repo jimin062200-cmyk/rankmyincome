@@ -19,7 +19,7 @@ for(const route of [...routes.map(r=>'tools/'+r+'/'),'compare/','rankings/top-1-
  await page.goto('/'+route);if(await page.locator('#tool-submit').count()){await expect(page.locator('#tool-submit')).toBeEnabled();await page.locator('#tool-submit').click();await expect(page.locator('#tool-result h2')).toBeVisible();}
  const results=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(results.violations).toEqual([]);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
- await page.screenshot({path:testInfo.outputPath('growth.png'),fullPage:true});
+ await page.screenshot({path:testInfo.outputPath('growth.png'),fullPage:true,scale:'css'});
 });
 test('converter produces 52000 from 25 hourly and rank links contain no income',async({page})=>{
  await page.goto('/tools/salary-converter/?country=US');await expect(page.locator('#tool-submit')).toBeEnabled();await page.locator('#tool-income').fill('25');await page.locator('#tool-period').selectOption('hourly');await page.locator('#tool-submit').click();await expect(page.locator('#tool-result')).toContainText('52,000');

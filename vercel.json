@@ -7,19 +7,140 @@
   "cleanUrls": false,
   "trailingSlash": true,
   "headers": [
-    {"source":"/(.*)","headers":[
-      {"key":"X-Content-Type-Options","value":"nosniff"},
-      {"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"},
-      {"key":"Permissions-Policy","value":"camera=(), microphone=(), geolocation=()"}
-    ]},
-    {"source":"/assets/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
-    {"source":"/data/:version/:file", "headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
-    {"source":"/data/income-data.json","headers":[{"key":"Cache-Control","value":"public, max-age=0, must-revalidate"}]},
-    {"source":"/sitemap.xml","headers":[{"key":"Cache-Control","value":"public, max-age=0, must-revalidate"}]}
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/data/:version/:file",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/data/income-data.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
   ],
   "redirects": [
-    {"source":"/index.html","destination":"/","permanent":true},
-    {"source":"/:language(ko|ja|zh|es|fr|de|pt)/index.html","destination":"/:language/","permanent":true},
-    {"source":"/countries/:country/index.html","destination":"/countries/:country/","permanent":true}
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/:language(ko|ja|zh|es|fr|de|pt)/index.html",
+      "destination": "/:language/",
+      "permanent": true
+    },
+    {
+      "source": "/countries/:country/index.html",
+      "destination": "/countries/:country/",
+      "permanent": true
+    },
+    {
+      "source": "/tools/index.html",
+      "destination": "/tools/",
+      "permanent": true
+    },
+    {
+      "source": "/tools/:tool/index.html",
+      "destination": "/tools/:tool/",
+      "permanent": true
+    },
+    {
+      "source": "/rankings/index.html",
+      "destination": "/rankings/",
+      "permanent": true
+    },
+    {
+      "source": "/rankings/:ranking/index.html",
+      "destination": "/rankings/:ranking/",
+      "permanent": true
+    },
+    {
+      "source": "/compare/index.html",
+      "destination": "/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/guides/index.html",
+      "destination": "/guides/",
+      "permanent": true
+    },
+    {
+      "source": "/guides/:guide/index.html",
+      "destination": "/guides/:guide/",
+      "permanent": true
+    },
+    {
+      "source": "/:language(ko|ja|zh|es|fr|de|pt)/tools/index.html",
+      "destination": "/:language/tools/",
+      "permanent": true
+    },
+    {
+      "source": "/:language(ko|ja|zh|es|fr|de|pt)/tools/:tool/index.html",
+      "destination": "/:language/tools/:tool/",
+      "permanent": true
+    },
+    {
+      "source": "/:language(ko|ja|zh|es|fr|de|pt)/rankings/index.html",
+      "destination": "/:language/rankings/",
+      "permanent": true
+    },
+    {
+      "source": "/:language(ko|ja|zh|es|fr|de|pt)/rankings/:ranking/index.html",
+      "destination": "/:language/rankings/:ranking/",
+      "permanent": true
+    },
+    {
+      "source": "/:language(ko|ja|zh|es|fr|de|pt)/compare/index.html",
+      "destination": "/:language/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/:language(ko|ja|zh|es|fr|de|pt)/countries/:country/index.html",
+      "destination": "/:language/countries/:country/",
+      "permanent": true
+    }
   ]
 }

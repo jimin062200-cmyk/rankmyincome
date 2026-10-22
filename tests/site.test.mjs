@@ -15,7 +15,7 @@ const info=JSON.parse(fs.readFileSync(path.join(root,'build-info.json'),'utf8'))
 function tags(s,name){return [...s.matchAll(new RegExp(`<${name}\\b[^>]*>`,'g'))].map(m=>m[0]);}
 function attrs(tag){return Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map(m=>[m[1],m[2]]));}
 test('every existing route plus all localized countries is built with unique metadata and valid structured data',()=>{
- assert.equal(info.pages,8*(208+2)+4);assert.equal(html.length,info.pages+1);
+ assert.equal(info.growthPages,123);assert.equal(info.pages,8*(208+2)+4+123);assert.equal(html.length,info.pages+1);
  for(const route of JSON.parse(fs.readFileSync('tests/fixtures/original-routes.json','utf8')))assert.ok(fs.existsSync(path.join(root,route)),`Original route removed: ${route}`);
  for(const [f,s] of pages){
   const loc=tags(s,'link').map(attrs).filter(a=>a.rel==='canonical');assert.equal(loc.length,1,f);assert.ok(!canonicals.has(loc[0].href),f);canonicals.add(loc[0].href);
@@ -25,7 +25,8 @@ test('every existing route plus all localized countries is built with unique met
   assert.ok(!s.includes('{{'),f);assert.ok(!/TOP 12\.0%|TOP 3\.0%/.test(s),f);
   for(const [,json]of s.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g))assert.doesNotThrow(()=>JSON.parse(json),f);
   const alternates=tags(s,'link').map(attrs).filter(a=>a.rel==='alternate');
-  if(f.endsWith('index.html')){assert.equal(alternates.length,9,f);assert.deepEqual(alternates.map(a=>a.hreflang).sort(),[...locales,'x-default'].sort(),f);
+  if(f.includes('/guides/'))assert.equal(alternates.length,0,'English-only editorial content has no invented translations');
+  if(f.endsWith('index.html')&&!f.includes('/guides/')){assert.equal(alternates.length,9,f);assert.deepEqual(alternates.map(a=>a.hreflang).sort(),[...locales,'x-default'].sort(),f);
    for(const a of alternates){const target=path.join(root,new URL(a.href).pathname,'index.html');assert.ok(fs.existsSync(target),a.href);const targetHTML=pages.get(target);assert.ok(targetHTML.includes(`href="${loc[0].href}"`),`No return link: ${a.href}`);}
   }
  }
@@ -65,4 +66,13 @@ test('generated locale controls are labeled, errors announced, navigation availa
  assert.equal(fs.readFileSync('ads.txt','utf8'),fs.readFileSync(path.join(root,'ads.txt'),'utf8'));
  const cfg=JSON.parse(fs.readFileSync('vercel.json','utf8'));assert.equal(cfg.outputDirectory,'dist');assert.equal(cfg.buildCommand,'npm run check');assert.ok(!cfg.rewrites,'No blanket SPA rewrite turning missing pages into soft 404s');
  assert.ok(!files.some(f=>/\/tests\/|\/scripts\/|\/\.git\//.test(f)));
+});
+test('all indexable pages are reachable through actual anchor navigation from the homepage',()=>{
+ const visited=new Set(),queue=['/'];while(queue.length){const route=queue.shift();if(visited.has(route))continue;visited.add(route);const f=routes.get(route);if(!f)continue;const s=pages.get(f);for(const tag of tags(s,'a')){const href=attrs(tag).href;if(!href||/^(mailto:|data:|blob:)/.test(href))continue;const u=new URL(href.replace(/&amp;/g,'&'),'https://rankmyincome.com'+route);if(u.origin==='https://rankmyincome.com'&&routes.has(u.pathname)&&!visited.has(u.pathname))queue.push(u.pathname);}}
+ for(const [route,f]of routes)if(!f.endsWith('404.html'))assert.ok(visited.has(route),'Orphan: '+route);
+});
+test('new tool scripts remain off the homepage and all new source locales have the same complete key set',()=>{
+ const home=pages.get(path.join(root,'index.html'));assert.ok(!/src="\/assets\/growth\./.test(home));assert.ok(!/src="\/assets\/growth-core\./.test(home));
+ const en=JSON.parse(fs.readFileSync('locales/growth-en.json'));for(const l of ['ko','ja','zh','es','fr','de','pt']){const d=JSON.parse(fs.readFileSync(`locales/growth-${l}.json`));assert.deepEqual(Object.keys(d).sort(),Object.keys(en).sort());for(const k of Object.keys(en))assert.ok(d[k]&&d[k]!==en[k],`${l}:${k}`);}
+ const cfg=JSON.parse(fs.readFileSync('vercel.json'));assert.ok(cfg.redirects.some(r=>r.source==='/tools/:tool/index.html'&&r.permanent));
 });

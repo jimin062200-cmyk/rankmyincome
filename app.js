@@ -87,7 +87,7 @@ async function calculate(event){
   $('#goal-target').replaceChildren(...targets.map(n=>{const o=node('option',top(n));o.value=n;return o;}));
   $('#goal-target').value=next?.max||.1;
   $('#compare-country').value=code==='US'?'KR':'US';
-  $('#share-status').textContent='';resultVisible(true);renderGoals();renderSaved();
+  $('#share-status').textContent='';resultVisible(true);renderGoals();renderBenchmarks();renderSaved();
   if($('#comparison-panel').open)await renderComparison();
   if(revision!==calculationRevision)return;
   $('#results').focus({preventScroll:true});$('#results').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
@@ -100,10 +100,21 @@ function renderGoals(){
  for(const [label,thresholds,factor] of [[countryName(LAST_RESULT.code),c.thresholds,1],[t('world'),DATA.world.thresholds,c.pppPerWorldUnit]]){
   const value=M.incomeForTop(target,thresholds)*factor,block=node('article',undefined,'goal-card');
   block.append(node('h3',label),node('p',t('annual'),'hint'),node('strong',money(Math.ceil(value),c),'goal-value'),node('p',`${t('monthly')}: ${money(value/12,c)}`));
-  const gap=Math.max(0,value-income);block.append(node('p',gap>0?`${t('gap')}: ${money(Math.ceil(gap),c)}`:t('reached'),'goal-gap'));
+  const gap=Math.max(0,value-income);block.append(node('p',`${TXT.growth.increase}: ${number(gap/income*100,2)}%`));block.append(node('p',gap>0?`${t('gap')}: ${money(Math.ceil(gap),c)}`:t('reached'),'goal-gap'));
   if(M.outsideRange(value/factor,thresholds))block.append(node('p',t('extrapolated'),'range-note'));
   output.append(block);
  }
+}
+function renderBenchmarks(){
+ if(!LAST_RESULT)return;const {income,c,code}=LAST_RESULT,g=TXT.growth;
+ const output=$('#result-benchmarks');output.replaceChildren();
+ const median=c.thresholds.find(([p])=>p===50)[1];
+ output.append(node('p',`${g.median}: ${money(median,c)} · ${g.medianRatio}: ${number(income/median,2)}×`));
+ const table=node('table',undefined,'threshold-table'),head=node('thead'),hr=node('tr');
+ for(const label of [t('rank'),t('annual'),t('gap')]){const th=node('th',label);th.scope='col';hr.append(th);}head.append(hr);table.append(head);const body=node('tbody');
+ for(const target of [25,10,5,1]){const value=M.incomeForTop(target,c.thresholds),row=node('tr'),th=node('th',top(target));th.scope='row';row.append(th,node('td',money(value,c)),node('td',money(Math.max(0,value-income),c)));body.append(row);}table.append(body);
+ const wrap=node('div',undefined,'threshold-table-wrap');wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label',g.summary);wrap.append(table);output.append(wrap);
+ const links=$('#result-tool-links');links.replaceChildren();for(const [route,label] of [['tools/income-goal/',g.incomeGoal],['tools/income-distribution/',g.distribution],['compare/',g.compare],['tools/global-income/',g.globalIncome]]){const a=node('a',label+' →');a.href=HOME+route+'?country='+code;links.append(a);}
 }
 async function renderComparison(){
  if(!LAST_RESULT||!$('#comparison-panel').open)return;

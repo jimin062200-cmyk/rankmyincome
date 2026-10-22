@@ -1,0 +1,381 @@
+{
+  "environment": "Local Chromium, unthrottled, ads blocked; no field performance claim",
+  "assets": {
+    "app.js": {
+      "bytes": 19479,
+      "gzipBytes": 6295,
+      "baselineGzipBytes": 5911
+    },
+    "calculator-core.js": {
+      "bytes": 4146,
+      "gzipBytes": 1775,
+      "baselineGzipBytes": 1775
+    },
+    "growth.js": {
+      "bytes": 12254,
+      "gzipBytes": 4325
+    },
+    "growth-core.js": {
+      "bytes": 1317,
+      "gzipBytes": 639
+    },
+    "growth.css": {
+      "bytes": 3931,
+      "gzipBytes": 1315
+    }
+  },
+  "pages": [
+    {
+      "route": "/",
+      "width": 375,
+      "domContentLoadedMs": 45,
+      "firstContentfulPaintMs": 108,
+      "largestContentfulPaintMs": 108,
+      "overflow": false,
+      "resources": [
+        {
+          "path": "/assets/styles.a85b1ea9d0b4.css",
+          "bytes": 12961
+        },
+        {
+          "path": "/assets/enhancements.3ea37e91cc6a.css",
+          "bytes": 8047
+        },
+        {
+          "path": "/assets/design.64e7da01e880.css",
+          "bytes": 13285
+        },
+        {
+          "path": "/assets/growth.3e901302ec1d.css",
+          "bytes": 3931
+        },
+        {
+          "path": "/assets/calculator-core.4e0af742da94.js",
+          "bytes": 4146
+        },
+        {
+          "path": "/assets/site.366c63c99a64.js",
+          "bytes": 1115
+        },
+        {
+          "path": "/assets/app.c11e85f1be6c.js",
+          "bytes": 19479
+        },
+        {
+          "path": "/data/e733fea92bd2a037/index.json",
+          "bytes": 32360
+        },
+        {
+          "path": "/logo.svg",
+          "bytes": 1098
+        }
+      ]
+    },
+    {
+      "route": "/tools/income-goal/",
+      "width": 375,
+      "domContentLoadedMs": 45.5999999998603,
+      "firstContentfulPaintMs": 44,
+      "largestContentfulPaintMs": 44,
+      "overflow": false,
+      "resources": [
+        {
+          "path": "/assets/styles.a85b1ea9d0b4.css",
+          "bytes": 12961
+        },
+        {
+          "path": "/assets/enhancements.3ea37e91cc6a.css",
+          "bytes": 8047
+        },
+        {
+          "path": "/assets/design.64e7da01e880.css",
+          "bytes": 13285
+        },
+        {
+          "path": "/assets/growth.3e901302ec1d.css",
+          "bytes": 3931
+        },
+        {
+          "path": "/assets/calculator-core.4e0af742da94.js",
+          "bytes": 4146
+        },
+        {
+          "path": "/assets/growth-core.6b771f2b37ff.js",
+          "bytes": 1317
+        },
+        {
+          "path": "/assets/site.366c63c99a64.js",
+          "bytes": 1115
+        },
+        {
+          "path": "/assets/growth.66708d73002d.js",
+          "bytes": 12254
+        },
+        {
+          "path": "/logo.svg",
+          "bytes": 1098
+        },
+        {
+          "path": "/data/e733fea92bd2a037/index.json",
+          "bytes": 32360
+        }
+      ]
+    },
+    {
+      "route": "/rankings/top-1-income/",
+      "width": 375,
+      "domContentLoadedMs": 41.300000000046566,
+      "firstContentfulPaintMs": 84,
+      "largestContentfulPaintMs": 84,
+      "overflow": false,
+      "resources": [
+        {
+          "path": "/assets/styles.a85b1ea9d0b4.css",
+          "bytes": 12961
+        },
+        {
+          "path": "/assets/enhancements.3ea37e91cc6a.css",
+          "bytes": 8047
+        },
+        {
+          "path": "/assets/design.64e7da01e880.css",
+          "bytes": 13285
+        },
+        {
+          "path": "/assets/growth.3e901302ec1d.css",
+          "bytes": 3931
+        },
+        {
+          "path": "/assets/growth-core.6b771f2b37ff.js",
+          "bytes": 1317
+        },
+        {
+          "path": "/assets/calculator-core.4e0af742da94.js",
+          "bytes": 4146
+        },
+        {
+          "path": "/assets/site.366c63c99a64.js",
+          "bytes": 1115
+        },
+        {
+          "path": "/assets/growth.66708d73002d.js",
+          "bytes": 12254
+        },
+        {
+          "path": "/logo.svg",
+          "bytes": 1098
+        }
+      ]
+    },
+    {
+      "route": "/ko/countries/south-korea/",
+      "width": 375,
+      "domContentLoadedMs": 18,
+      "firstContentfulPaintMs": 104,
+      "largestContentfulPaintMs": 104,
+      "overflow": false,
+      "resources": [
+        {
+          "path": "/assets/styles.a85b1ea9d0b4.css",
+          "bytes": 12961
+        },
+        {
+          "path": "/assets/enhancements.3ea37e91cc6a.css",
+          "bytes": 8047
+        },
+        {
+          "path": "/assets/design.64e7da01e880.css",
+          "bytes": 13285
+        },
+        {
+          "path": "/assets/growth.3e901302ec1d.css",
+          "bytes": 3931
+        },
+        {
+          "path": "/assets/site.366c63c99a64.js",
+          "bytes": 1115
+        },
+        {
+          "path": "/logo.svg",
+          "bytes": 1098
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "width": 1280,
+      "domContentLoadedMs": 34.699999999953434,
+      "firstContentfulPaintMs": 84,
+      "largestContentfulPaintMs": 84,
+      "overflow": false,
+      "resources": [
+        {
+          "path": "/assets/styles.a85b1ea9d0b4.css",
+          "bytes": 12961
+        },
+        {
+          "path": "/assets/enhancements.3ea37e91cc6a.css",
+          "bytes": 8047
+        },
+        {
+          "path": "/assets/design.64e7da01e880.css",
+          "bytes": 13285
+        },
+        {
+          "path": "/assets/growth.3e901302ec1d.css",
+          "bytes": 3931
+        },
+        {
+          "path": "/assets/site.366c63c99a64.js",
+          "bytes": 1115
+        },
+        {
+          "path": "/assets/calculator-core.4e0af742da94.js",
+          "bytes": 4146
+        },
+        {
+          "path": "/assets/app.c11e85f1be6c.js",
+          "bytes": 19479
+        },
+        {
+          "path": "/data/e733fea92bd2a037/index.json",
+          "bytes": 32360
+        },
+        {
+          "path": "/logo.svg",
+          "bytes": 1098
+        }
+      ]
+    },
+    {
+      "route": "/tools/income-goal/",
+      "width": 1280,
+      "domContentLoadedMs": 46.39999999990687,
+      "firstContentfulPaintMs": 56,
+      "largestContentfulPaintMs": 56,
+      "overflow": false,
+      "resources": [
+        {
+          "path": "/assets/styles.a85b1ea9d0b4.css",
+          "bytes": 12961
+        },
+        {
+          "path": "/assets/enhancements.3ea37e91cc6a.css",
+          "bytes": 8047
+        },
+        {
+          "path": "/assets/design.64e7da01e880.css",
+          "bytes": 13285
+        },
+        {
+          "path": "/assets/growth.3e901302ec1d.css",
+          "bytes": 3931
+        },
+        {
+          "path": "/assets/site.366c63c99a64.js",
+          "bytes": 1115
+        },
+        {
+          "path": "/assets/calculator-core.4e0af742da94.js",
+          "bytes": 4146
+        },
+        {
+          "path": "/assets/growth-core.6b771f2b37ff.js",
+          "bytes": 1317
+        },
+        {
+          "path": "/assets/growth.66708d73002d.js",
+          "bytes": 12254
+        },
+        {
+          "path": "/logo.svg",
+          "bytes": 1098
+        },
+        {
+          "path": "/data/e733fea92bd2a037/index.json",
+          "bytes": 32360
+        }
+      ]
+    },
+    {
+      "route": "/rankings/top-1-income/",
+      "width": 1280,
+      "domContentLoadedMs": 33.5,
+      "firstContentfulPaintMs": 88,
+      "largestContentfulPaintMs": 88,
+      "overflow": false,
+      "resources": [
+        {
+          "path": "/assets/styles.a85b1ea9d0b4.css",
+          "bytes": 12961
+        },
+        {
+          "path": "/assets/enhancements.3ea37e91cc6a.css",
+          "bytes": 8047
+        },
+        {
+          "path": "/assets/growth.3e901302ec1d.css",
+          "bytes": 3931
+        },
+        {
+          "path": "/assets/design.64e7da01e880.css",
+          "bytes": 13285
+        },
+        {
+          "path": "/assets/site.366c63c99a64.js",
+          "bytes": 1115
+        },
+        {
+          "path": "/assets/calculator-core.4e0af742da94.js",
+          "bytes": 4146
+        },
+        {
+          "path": "/assets/growth-core.6b771f2b37ff.js",
+          "bytes": 1317
+        },
+        {
+          "path": "/assets/growth.66708d73002d.js",
+          "bytes": 12254
+        },
+        {
+          "path": "/logo.svg",
+          "bytes": 1098
+        }
+      ]
+    },
+    {
+      "route": "/ko/countries/south-korea/",
+      "width": 1280,
+      "domContentLoadedMs": 16.700000000186265,
+      "firstContentfulPaintMs": 84,
+      "largestContentfulPaintMs": 84,
+      "overflow": false,
+      "resources": [
+        {
+          "path": "/assets/styles.a85b1ea9d0b4.css",
+          "bytes": 12961
+        },
+        {
+          "path": "/assets/enhancements.3ea37e91cc6a.css",
+          "bytes": 8047
+        },
+        {
+          "path": "/assets/design.64e7da01e880.css",
+          "bytes": 13285
+        },
+        {
+          "path": "/assets/growth.3e901302ec1d.css",
+          "bytes": 3931
+        },
+        {
+          "path": "/assets/site.366c63c99a64.js",
+          "bytes": 1115
+        },
+        {
+          "path": "/logo.svg",
+          "bytes": 1098
+        }
+      ]
+    }
+  ]
+}

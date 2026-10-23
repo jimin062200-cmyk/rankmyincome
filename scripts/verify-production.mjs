@@ -33,7 +33,7 @@ try {
  let homepage;
  const localeChecks=await Promise.allSettled(Object.entries(languages).map(async([locale,lang])=>{
   const home=locale==='en'?'/':`/${locale}/`;
-  for(const route of [home,`${home}countries/`,`${home}countries/south-korea/`]) {
+  for(const route of [home,`${home}countries/`,`${home}countries/south-korea/`,`${home}tools/top-income/`,`${home}tools/salary-converter/`,`${home}rankings/top-1-income/`,`${home}compare/`]) {
    const value=await check(route,({response,text})=>{
     assert.equal(response.status,200,route);
     assert.ok(!/noindex/i.test(response.headers.get('x-robots-tag')||''), `${route}: HTTP noindex`);
@@ -53,6 +53,7 @@ try {
  }));
  const failures=localeChecks.filter(result=>result.status==='rejected');
  assert.equal(failures.length,0,failures.map(result=>result.reason.message).join('; '));
+ for(const route of ['/guides/','/guides/purchasing-power-parity/'])await check(route,({response,text})=>{assert.equal(response.status,200);assert.ok(text.includes(`href="${origin+route}"`));});
  await check('/robots.txt',({response,text})=>{assert.equal(response.status,200);assert.match(text,/Sitemap: https:\/\/rankmyincome\.com\/sitemap\.xml/);assert.ok(!/^Disallow:\s*\/\s*$/m.test(text));});
  await check('/sitemap.xml',({response,text})=>{assert.equal(response.status,200);assert.equal((text.match(/<loc>/g)||[]).length,report.build.pages);});
  await check('/ads.txt',({response,text})=>{assert.equal(response.status,200);assert.match(text,/google\.com,\s*pub-2948191504774582,\s*DIRECT,\s*f08c47fec0942fa0/);});

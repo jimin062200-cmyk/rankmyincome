@@ -65,3 +65,9 @@ npm run check
 ```
 
 Only enable production status after the documented source/licensing checks. See `DATA_POLICY.md` and `docs/UPGRADE_AUDIT.md`. The legacy country-generation entrypoint now delegates to the single current build; there is no second sitemap pipeline.
+
+## Search growth expansion
+
+The original calculator remains at `/`. New localized entry points live under `/tools/`, `/rankings/` and `/compare/`; `/guides/` contains ten English explanatory articles. All tools reuse `calculator-core.js` and the unchanged WID snapshot. `growth-core.js` contains only salary/raise/PPP arithmetic; `growth.js` is loaded only by the relevant tools and tables.
+
+See [SEARCH_GROWTH_AUDIT.md](docs/SEARCH_GROWTH_AUDIT.md) for research, routes, data definitions, verification and release gates. `npm run check` includes new tools and link-graph checks. `npm run test:browser` covers Chromium and mobile WebKit. Optional `node scripts/measure-growth.mjs` records local diagnostic timings and payload sizes; it is not a field Core Web Vitals measurement.

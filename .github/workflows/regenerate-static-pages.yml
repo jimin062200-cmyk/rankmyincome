@@ -11,23 +11,36 @@ concurrency:
   cancel-in-progress: true
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
+    # Browser binaries and OS dependencies match package-lock.json; no apt install in CI.
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble@sha256:42f02d323c310069b4d54c94bd91a608966a486c3492c48ae0b1cea747ec5ca2
+      options: --ipc=host
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '22'
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm run check
-      - name: Install test browsers
-        run: npx playwright install --with-deps chromium webkit
+      - name: Check preinstalled browser compatibility
+        run: |
+          node -e "require('node:assert/strict').equal(require('@playwright/test/package.json').version, '1.56.1', 'Update the pinned Playwright image with the npm version')"
+      - name: Verify browser launch
+        timeout-minutes: 2
+        run: |
+          node --input-type=module -e "import { chromium, webkit } from '@playwright/test'; for (const browserType of [chromium, webkit]) { const browser = await browserType.launch(); console.log(browserType.name(), browser.version()); await browser.close(); }"
       - name: Desktop, mobile and accessibility regression
+        id: browsers
+        timeout-minutes: 8
         run: npm run test:browser
       - name: Store browser report and screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() && steps.browsers.outcome != 'skipped' && hashFiles('playwright-report/**', 'test-results/**') != '' }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: browser-regression
           path: |
@@ -35,7 +48,7 @@ jobs:
             test-results/
           retention-days: 14
       - name: Store tested static build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: site-dist
           path: dist/
@@ -43,11 +56,13 @@ jobs:
   production:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: validate
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '22'
           cache: npm
@@ -55,8 +70,8 @@ jobs:
       - name: Verify the actual production deployment
         run: node scripts/verify-production.mjs
       - name: Store production verification evidence
-        if: always()
-        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() && hashFiles('test-results/production-verification.json') != '' }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: production-verification
           path: test-results/production-verification.json

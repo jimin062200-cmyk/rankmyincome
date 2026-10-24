@@ -7,3 +7,12 @@ node_modules/
 dist/
 test-results/
 playwright-report/
+# Private Search Console analysis: never publish query or performance data.
+docs/gsc-*.json
+docs/seo-changes.json
+docs/seo-opportunities.json
+docs/seo-metadata-before.json
+docs/SEO_TARGETED_REPORT.md
+scripts/seo-report.mjs
+scripts/seo-opportunities.mjs
+scripts/seo-compare.mjs

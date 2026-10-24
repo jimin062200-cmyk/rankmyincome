@@ -9,11 +9,12 @@
     "build": "node scripts/build-site.mjs",
     "test": "node --test tests/calculator.test.cjs",
     "check:site": "node --test tests/site.test.mjs",
-    "check": "npm test && npm run build && npm run check:site && npm run test:dom && npm run test:growth && node --test tests/production.test.mjs",
+    "check": "npm test && npm run build && npm run check:site && npm run test:dom && npm run test:growth && node --test tests/production.test.mjs && npm run check:seo",
     "test:browser": "playwright test",
     "serve": "node scripts/serve.mjs",
     "test:dom": "node --test tests/dom.test.cjs",
-    "test:growth": "node --test tests/growth.test.cjs"
+    "test:growth": "node --test tests/growth.test.cjs",
+    "check:seo": "node --test tests/seo.test.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",

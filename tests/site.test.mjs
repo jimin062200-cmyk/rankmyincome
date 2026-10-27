@@ -15,7 +15,7 @@ const info=JSON.parse(fs.readFileSync(path.join(root,'build-info.json'),'utf8'))
 function tags(s,name){return [...s.matchAll(new RegExp(`<${name}\\b[^>]*>`,'g'))].map(m=>m[0]);}
 function attrs(tag){return Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map(m=>[m[1],m[2]]));}
 test('every existing route plus all localized countries is built with unique metadata and valid structured data',()=>{
- assert.equal(info.growthPages,123);assert.equal(info.pages,8*(208+2)+4+123);assert.equal(html.length,info.pages+1);
+ assert.equal(info.growthPages,123);assert.equal(info.pages,8*(208+2)+6+123);assert.equal(html.length,info.pages+1);
  for(const route of JSON.parse(fs.readFileSync('tests/fixtures/original-routes.json','utf8')))assert.ok(fs.existsSync(path.join(root,route)),`Original route removed: ${route}`);
  for(const [f,s] of pages){
   const loc=tags(s,'link').map(attrs).filter(a=>a.rel==='canonical');assert.equal(loc.length,1,f);assert.ok(!canonicals.has(loc[0].href),f);canonicals.add(loc[0].href);
@@ -75,4 +75,12 @@ test('new tool scripts remain off the homepage and all new source locales have t
  const home=pages.get(path.join(root,'index.html'));assert.ok(!/src="\/assets\/growth\./.test(home));assert.ok(!/src="\/assets\/growth-core\./.test(home));
  const en=JSON.parse(fs.readFileSync('locales/growth-en.json'));for(const l of ['ko','ja','zh','es','fr','de','pt']){const d=JSON.parse(fs.readFileSync(`locales/growth-${l}.json`));assert.deepEqual(Object.keys(d).sort(),Object.keys(en).sort());for(const k of Object.keys(en))assert.ok(d[k]&&d[k]!==en[k],`${l}:${k}`);}
  const cfg=JSON.parse(fs.readFileSync('vercel.json'));assert.ok(cfg.redirects.some(r=>r.source==='/tools/:tool/index.html'&&r.permanent));
+});
+test('review build keeps verification but never requests ads, including on error pages',()=>{
+ for(const [file,html] of pages){assert.ok(!html.includes('adsbygoogle.js'),file);assert.ok(!/class="adsbygoogle"/.test(html),file);assert.match(html,/name="google-adsense-account" content="ca-pub-2948191504774582"/,file);}
+ for(const name of ['about','methodology','data-sources','privacy','terms','contact']){
+  const html=pages.get(path.join(root,name+'.html'));assert.ok(html,name);assert.ok(!/noindex/.test(html),name);assert.match(html,new RegExp(`href="https://rankmyincome.com/${name}\\.html"`));
+ }
+ const cases=[['countries/france/','FR',['BE','IT','ES'],'en'],['countries/pakistan/','PK',['IN','BD','NP'],'en'],['de/countries/mauritius/','MU',['SC','MG','ZA'],'de'],['de/countries/thailand/','TH',['VN','MY','ID'],'de'],['ja/countries/ecuador/','EC',['CO','PE','BO'],'ja']];
+ for(const [route,code,peers,l] of cases){const html=pages.get(path.join(root,route,'index.html'));assert.match(html,/data-country-reading/);for(const k of [code,...peers]){const c=data.countries[k],v=c.thresholds.find(([p])=>p===50)[1]/c.pppPerWorldUnit;assert.ok(html.includes(`<td>${new Intl.NumberFormat(l,{maximumFractionDigits:2}).format(v)}</td>`),route+k);}}
 });

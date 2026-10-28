@@ -1,0 +1,270 @@
+{
+  "/countries/australia/": {
+    "lastmod": "2026-10-28",
+    "sha256": "509e481a751c7c102a3985859abcc3ed8614b9a9ea97c13e4d01e1a4fd796a20"
+  },
+  "/countries/bangladesh/": {
+    "lastmod": "2026-10-28",
+    "sha256": "61266deaf9bdf579f8a8b66b81eff9bf4b01b3429103a39395c11b2bc944cdf9"
+  },
+  "/countries/": {
+    "lastmod": "2026-10-28",
+    "sha256": "f0d1e3900feb6c9cc925b2c5a0c3d4795bf0842443ed0a6d3abb2fd89580e1b3"
+  },
+  "/countries/india/": {
+    "lastmod": "2026-10-28",
+    "sha256": "a7e72b0e6b4ea11a28266c381df83bd494258de00df4f14ed7343675680f9dcb"
+  },
+  "/countries/italy/": {
+    "lastmod": "2026-10-28",
+    "sha256": "c07bd024e2b217347006b50dd7b4f2615a8ae13db65ee6f2c403af09f168b30a"
+  },
+  "/countries/mexico/": {
+    "lastmod": "2026-10-28",
+    "sha256": "a8a8aedd4a9148db6fb904dbe957781a3c54702e1b2a4545e981c1f640f6f87f"
+  },
+  "/countries/norway/": {
+    "lastmod": "2026-10-28",
+    "sha256": "aabc4e13d9ac12be6da4e9b55fa1d50c4b6e3a7c3f22c684cceefcb9cf8fdb91"
+  },
+  "/countries/philippines/": {
+    "lastmod": "2026-10-28",
+    "sha256": "d5be9382804d0f9a5bba9895fe4c246c2eed2079f5a0895185d8998d1d476352"
+  },
+  "/countries/singapore/": {
+    "lastmod": "2026-10-28",
+    "sha256": "6e862a8c3fd7e1a27ae42bd60d85bb5d454f9a235e58bd56d5f2ee1e76d7b491"
+  },
+  "/countries/south-korea/": {
+    "lastmod": "2026-10-28",
+    "sha256": "0cbe9673328432527a2659e962a1abb72304f600030f4ad8ae202905c197451b"
+  },
+  "/countries/sweden/": {
+    "lastmod": "2026-10-28",
+    "sha256": "0f4c5938bc83b30ab5f16180b97309a0339a374dfd11944e31a49f1bf4f55834"
+  },
+  "/countries/united-states/": {
+    "lastmod": "2026-10-28",
+    "sha256": "bc228d3345b7a163c350187a1aba645d308ae6c1ca16c8771dbcc743e124265f"
+  },
+  "/countries/vietnam/": {
+    "lastmod": "2026-10-28",
+    "sha256": "fe0c6978b22b4705f144277965c79ee27bf3d582dbb58e3cca882472fd22be06"
+  },
+  "/de/rankings/": {
+    "lastmod": "2026-10-28",
+    "sha256": "7bf5edd3396ec9307cd748c23574b5e6327a3719df1aad71b86e795ee1ef569f"
+  },
+  "/de/rankings/median-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "d761aec4e65a8334916497bcc12c6eceedc036af4108fbb6e42e54d1df76e189"
+  },
+  "/de/rankings/top-1-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "83c2f567fc7a6d001ae8081f59863a2d585e421dbca17e506956543843a684a0"
+  },
+  "/de/rankings/top-10-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "08cb790143395a76e1e4ae68fd9f33ae357f84d428ab3a8a9040544321922259"
+  },
+  "/de/rankings/top-5-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "74058727874558c2e056d9c08d43ae18832fcfd90b2a7719822238a6102d3538"
+  },
+  "/es/rankings/": {
+    "lastmod": "2026-10-28",
+    "sha256": "c9daaa676ac976c94255bc035dc31a9e0f3957c7b9e325b568b96ba3ba48e142"
+  },
+  "/es/rankings/median-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "cf2794c0bb3d0c6ba7595e298ded0ce06a97905a2323e75c2fe3e0f2dfaf1e2c"
+  },
+  "/es/rankings/top-1-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "b57ba6e6d17cd72b1eb45012f8385c466adf7d7643aa179d5435deb4edf201a5"
+  },
+  "/es/rankings/top-10-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "3201f97e8f22b8a7f6e945c2aa35f47bee7d62f32cf3b7316587f950244b7197"
+  },
+  "/es/rankings/top-5-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "c6299f689fa7e799058df5f07a118d66cfdd3994864a0ebcbabb1cb144696feb"
+  },
+  "/fr/countries/france/": {
+    "lastmod": "2026-10-28",
+    "sha256": "e60d72ed2f1390ad4af197d80626b977bff31bdb0518e941f8ec3a32435f96cc"
+  },
+  "/fr/countries/": {
+    "lastmod": "2026-10-28",
+    "sha256": "df2d5acd5de6807c037f762037e9b7e74281c5e80095d88bb3af9e2b90a5dc3a"
+  },
+  "/fr/rankings/": {
+    "lastmod": "2026-10-28",
+    "sha256": "7cea206e3b41210a31edecb57b60fbf0c1bb4ce4babfa6f6230b25c57321fa8b"
+  },
+  "/fr/rankings/median-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "bc234e7eb688c361fa7389abdf31e3abaa787b1e78aa244176de5e5d149428d3"
+  },
+  "/fr/rankings/top-1-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "0b9fcd02d612d4334ea188acd3e927ed1d8d8e45e7efc5a865c93c9b0661eb36"
+  },
+  "/fr/rankings/top-10-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "cc1cd1adb2825ac342b26d7450d6e689afef9bddc534397bd299764cdcdb96b8"
+  },
+  "/fr/rankings/top-5-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "b34686338604544bf77cfdbe5cf0f1a2c6d4f8ba46ab667d4acb68c345e0d2be"
+  },
+  "/fr/tools/": {
+    "lastmod": "2026-10-28",
+    "sha256": "a754858cc60a488a424c9e0dda394b84d07e62711cfd1c3cc2d68255c157805d"
+  },
+  "/ja/rankings/": {
+    "lastmod": "2026-10-28",
+    "sha256": "17b2b94df8ddeb0f1a31c0955feae0b0bb4f9bb7a589dcbb461acd891169f3d7"
+  },
+  "/ja/rankings/median-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "bc7a8f8ef2a39238d6a2f0ef56226bc84d0eddd16c3bf4812748ad9a6818a238"
+  },
+  "/ja/rankings/top-1-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "aab118c38b0d0e0a46c9d3ead246b73e7c6cd2d359a0d4813bdd54a13f80dd68"
+  },
+  "/ja/rankings/top-10-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "3aea27bc4dfce777f84566b8145254dd5835c786595c37646512ce8ede5478f8"
+  },
+  "/ja/rankings/top-5-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "7b9f04e01ecbd6ce5a1a2256801b221f403e86a1506cb590a05a83aa17e32b1d"
+  },
+  "/ko/countries/austria/": {
+    "lastmod": "2026-10-28",
+    "sha256": "07e909bccbd0923c4e90840d24eedf0499f1c5d598b12b45c5fb5cf295e185d4"
+  },
+  "/ko/countries/": {
+    "lastmod": "2026-10-28",
+    "sha256": "5ad4ae99e2ce6b0fb80604512c11d395b18102158025e843ff5d541d70fc6e93"
+  },
+  "/ko/countries/singapore/": {
+    "lastmod": "2026-10-28",
+    "sha256": "a53d4eb57674cb2204aaaf9ac1a0e0f06eef6e37c4f1163e4fc43bf7a1a64f92"
+  },
+  "/ko/rankings/": {
+    "lastmod": "2026-10-28",
+    "sha256": "0f1985270169bc436cee5950e90a1fa9b648c24a9fdc609c9455503f21f36401"
+  },
+  "/ko/rankings/median-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "662c2283aad937ba339cce9baec08839ba02970ea1213a7f38475e1968fce55b"
+  },
+  "/ko/rankings/top-1-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "07cfd156c77581a3831db0b7697924745c3eaddd003b1f348e22f8685d8b78ec"
+  },
+  "/ko/rankings/top-10-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "cf5ce25aabb9aeac140621926e57bc066c9d51a1a6c6029d12d5fb147a0549b8"
+  },
+  "/ko/rankings/top-5-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "ea828781048d074aab6c1ca4936d27b394fddf127e265f22952efd0599f813d1"
+  },
+  "/ko/tools/": {
+    "lastmod": "2026-10-28",
+    "sha256": "74f81b8bce702c5edcee49bc155a0ee3896643d6d3124308451ebb0659a60731"
+  },
+  "/pt/countries/": {
+    "lastmod": "2026-10-28",
+    "sha256": "669a012ccb81952c5e23102f94830547d41ea77ee5e9c761b029055ae763af2d"
+  },
+  "/pt/countries/united-states/": {
+    "lastmod": "2026-10-28",
+    "sha256": "7eea3b0f3fed9d0be2c61f4265503c28a5c270dc66912becea179be338388b6e"
+  },
+  "/pt/rankings/": {
+    "lastmod": "2026-10-28",
+    "sha256": "ff4c24ba8fb8ec1484ef8a5aff6c9afeed3b1aa994d384f1c1efca53f7d6d822"
+  },
+  "/pt/rankings/median-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "e6c4f1402ea812ce05244a38e62eb01ad7197eccdf8de654ec1392dbd20e8125"
+  },
+  "/pt/rankings/top-1-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "afb9e888a9636c649573195bb48ade906fb474060a0b30295786a93cfd30f0c2"
+  },
+  "/pt/rankings/top-10-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "2fff3960c9c41a147f9a2ae451d0e86982b4a1bac3e9f5632528d4fa3bc2b3f1"
+  },
+  "/pt/rankings/top-5-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "59b0dcbb7a29ae9a56a810e825ab2e45b4d7b4c85a146ce6f29b1cee4ee63d7b"
+  },
+  "/pt/tools/": {
+    "lastmod": "2026-10-28",
+    "sha256": "c13cbd4880d0310e94e210959538b61527ef020594328fd6d4d9873721ce3e30"
+  },
+  "/rankings/": {
+    "lastmod": "2026-10-28",
+    "sha256": "f1699bffa264230359f7d67713a9d1ca6dad983a567d2fe5409fa621a21b8ba3"
+  },
+  "/rankings/median-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "0166a4f8e785112caefa5e1ff7477e094b70feb0bd1310f248a5ce4d9f937ce7"
+  },
+  "/rankings/top-1-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "f691d4453c716ed3edab01d6528155a85b0f1a4d7f05ef7073bf8e0154c6f0c3"
+  },
+  "/rankings/top-10-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "2d01f288e06cc740a429be9d47f802d93713522670853f80bc7d746ba8b7c0cd"
+  },
+  "/rankings/top-5-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "f3b8f6aae6f65b3c6c48c2d088fb214e09863cc0cd9958e8921b4f8e0767a995"
+  },
+  "/tools/": {
+    "lastmod": "2026-10-28",
+    "sha256": "ba71c033b096b1786505f81f31727703dc66a86824428dd6b4a81039c520a025"
+  },
+  "/zh/countries/": {
+    "lastmod": "2026-10-28",
+    "sha256": "13e5b371ed9d70315de432ef115b0d11cf360e91e4e0686ac7745624d0a0e4c3"
+  },
+  "/zh/countries/south-korea/": {
+    "lastmod": "2026-10-28",
+    "sha256": "3776957f220e5d3af4b4c532256a6b411b79551419e9324e5c11e73278b1009d"
+  },
+  "/zh/rankings/": {
+    "lastmod": "2026-10-28",
+    "sha256": "efa244de844ac7c31d7f70b57fa5b45692b47f36a13a7092b560ad00f4956565"
+  },
+  "/zh/rankings/median-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "9587af6f288a8f82a54e8421404d9983c6e46c6126367b9c054a5d43a0749ab1"
+  },
+  "/zh/rankings/top-1-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "042178f3bdcda42c0b0aab96f351a517310e005d533a4ab99dcd9c0a8740015d"
+  },
+  "/zh/rankings/top-10-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "91afd072d0db07eb9b3d0119b55f146b5a6c14d4561519963cf7d984ed4d34c4"
+  },
+  "/zh/rankings/top-5-income/": {
+    "lastmod": "2026-10-28",
+    "sha256": "978b357e3714174401762c290d47c609a7d522e3da8a2b24edc47044b4e42284"
+  },
+  "/zh/tools/": {
+    "lastmod": "2026-10-28",
+    "sha256": "dd492e6b434be3bc184858ed6671662b0051991144dce14f4fc4ed2d4566b3f9"
+  }
+}

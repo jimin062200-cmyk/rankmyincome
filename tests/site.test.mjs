@@ -76,8 +76,8 @@ test('new tool scripts remain off the homepage and all new source locales have t
  const en=JSON.parse(fs.readFileSync('locales/growth-en.json'));for(const l of ['ko','ja','zh','es','fr','de','pt']){const d=JSON.parse(fs.readFileSync(`locales/growth-${l}.json`));assert.deepEqual(Object.keys(d).sort(),Object.keys(en).sort());for(const k of Object.keys(en))assert.ok(d[k]&&d[k]!==en[k],`${l}:${k}`);}
  const cfg=JSON.parse(fs.readFileSync('vercel.json'));assert.ok(cfg.redirects.some(r=>r.source==='/tools/:tool/index.html'&&r.permanent));
 });
-test('review build keeps verification but never requests ads, including on error pages',()=>{
- for(const [file,html] of pages){assert.ok(!html.includes('adsbygoogle.js'),file);assert.ok(!/class="adsbygoogle"/.test(html),file);assert.match(html,/name="google-adsense-account" content="ca-pub-2948191504774582"/,file);}
+test('AdSense appears once on content routes and stays off errors and trust pages',()=>{
+ for(const [file,html] of pages){const eligible=file.endsWith('index.html');assert.equal((html.match(/src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/g)||[]).length,eligible?1:0,file);assert.ok(!/class="adsbygoogle"/.test(html),file);assert.match(html,/name="google-adsense-account" content="ca-pub-2948191504774582"/,file);}
  for(const name of ['about','methodology','data-sources','privacy','terms','contact']){
   const html=pages.get(path.join(root,name+'.html'));assert.ok(html,name);assert.ok(!/noindex/.test(html),name);assert.match(html,new RegExp(`href="https://rankmyincome.com/${name}\\.html"`));
  }

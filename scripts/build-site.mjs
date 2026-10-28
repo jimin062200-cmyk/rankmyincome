@@ -1,4 +1,6 @@
 import {countryReading} from '../content/country-reading.mjs';
+import {searchCountry,searchCountryLinks} from '../content/search-discovery.mjs';
+import {verifiedLastmod} from './search-freshness.mjs';
 // Google Privacy & messaging uses the standard AdSense loader on content routes only.
 import {countrySEO,priorityLinks} from '../content/seo-country.mjs';
 import {growthPages,toolRoutes} from './growth-pages.mjs';
@@ -53,7 +55,7 @@ function shell(l,title,description,suffix,body,{calculator=false,tool=null,schem
  const canonical=BASE+home(l)+suffix;
  const adsEligible=!noindex && (suffix==='' || /^(countries|tools|rankings|compare|guides)\//.test(suffix));
  const adScript=adsEligible?'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2948191504774582" crossorigin="anonymous"></script>':'';
- body=body.replace('</main>',priorityLinks({data,home,slug,regionName,money,esc},l,suffix)+'</main>');
+ body=body.replace('</main>',priorityLinks({data,home,slug,regionName,money,esc},l,suffix)+searchCountryLinks({data,home,slug,regionName,money,esc},l,suffix)+'</main>');
  if(!noindex)urls.push(canonical);
  return `<!doctype html><html lang="${langs[l][0]}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="${noindex?'noindex,follow':'index,follow,max-image-preview:large'}"><link rel="canonical" href="${canonical}">${alternates?Object.entries(langs).map(([k,[tag]])=>`<link rel="alternate" hreflang="${tag}" href="${BASE+home(k)+suffix}">`).join('')+`<link rel="alternate" hreflang="x-default" href="${BASE+'/'+suffix}">`:''}<link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#07111f"><meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:locale" content="${langs[l][0].replace('-','_')}"><meta property="og:image" content="${BASE}/social-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="RankMyIncome"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="${BASE}/social-card.png"><link rel="stylesheet" href="${assets['styles.css']}"><link rel="stylesheet" href="${assets['enhancements.css']}"><link rel="stylesheet" href="${assets['design.css']}"><link rel="stylesheet" href="${assets['growth.css']}"><meta name="google-adsense-account" content="ca-pub-2948191504774582">${adScript}${schema?`<script type="application/ld+json">${JSON.stringify(schema).replace(/</g,'\\u003c')}</script>`:''}</head><body data-locale="${l}"${calculator||tool?` data-source="/data/${version}/"`:''}>${nav(l,alternates?suffix:'')}${body}${footer(l)}<script src="${assets['site.js']}" defer></script>${tool?`<script id="tool-config" type="application/json">${JSON.stringify({...tool,d:dicts[l],g:growth[l]}).replace(/</g,'\\u003c')}</script><script src="${assets['calculator-core.js']}" defer></script><script src="${assets['growth-core.js']}" defer></script><script src="${assets['growth.js']}" defer></script>`:''}${calculator?`<script id="ui-strings" type="application/json">${JSON.stringify({...dicts[l],growth:growth[l]}).replace(/</g,'\\u003c')}</script><script src="${assets['calculator-core.js']}" defer></script><script src="${assets['app.js']}" defer></script>`:''}</body></html>\n`;
 }
@@ -87,7 +89,7 @@ for(const [l,d] of Object.entries(dicts)){
  for(const [code,c] of Object.entries(data.countries)){
   const name=regionName(l,code), suffix=`countries/${slug(c.name)}/`, canonical=BASE+home(l)+suffix;
   const p=c.thresholds, exact=x=>p.find(([n])=>n===x)?.[1];
-  const seo=countrySEO({data,home,slug,regionName,money,esc},l,code);
+  const seo=countrySEO({data,home,slug,regionName,money,esc},l,code)||searchCountry({data,home,slug,regionName,money,esc},l,code);
   const title=seo?.title||t(d,'countryTitle',{name}), intro=seo?.intro||t(d,'countryIntro',{name,top10:money(l,exact(90),c.currency),top1:money(l,exact(99),c.currency)});
   // Related pages use similar median purchasing power, a meaningful comparison,
   // rather than adjacency in an English alphabet.
@@ -118,6 +120,11 @@ write(`data/${version}/index.json`,JSON.stringify(summary));
 for(const [code,c] of Object.entries(data.countries))write(`data/${version}/${code}.json`,JSON.stringify(c));
 // Keep the existing public dataset URL available for transparency and reuse.
 write('data/income-data.json',JSON.stringify(data));
-write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+urls.map(u=>`<url><loc>${esc(u)}</loc></url>`).join('\n')+'\n</urlset>\n');
+const searchUpdates=JSON.parse(fs.readFileSync(path.join(ROOT,'content/search-updates.json'),'utf8'));
+write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+urls.map(u=>{
+ const route=new URL(u).pathname,entry=searchUpdates[route];
+ const lastmod=entry?verifiedLastmod(fs.readFileSync(path.join(OUT,route,route.endsWith('/')?'index.html':''),'utf8'),entry):null;
+ return `<url><loc>${esc(u)}</loc>${lastmod?`<lastmod>${lastmod}</lastmod>`:''}</url>`;
+}).join('\n')+'\n</urlset>\n');
 write('build-info.json',JSON.stringify({version,pages:urls.length,countries:Object.keys(data.countries).length,languages:Object.keys(langs),growthPages:8*(Object.keys(toolRoutes).length+7)+guidePages,commit:process.env.VERCEL_GIT_COMMIT_SHA||process.env.GITHUB_SHA||'local'}));
 console.log(`Built ${urls.length} indexable pages, ${Object.keys(data.countries).length} countries, ${Object.keys(langs).length} languages. Dataset ${version} (unchanged).`);

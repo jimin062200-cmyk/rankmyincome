@@ -14,7 +14,7 @@
     "serve": "node scripts/serve.mjs",
     "test:dom": "node --test tests/dom.test.cjs",
     "test:growth": "node --test tests/growth.test.cjs",
-    "check:seo": "node --test tests/seo.test.mjs"
+    "check:seo": "node --test tests/seo.test.mjs tests/search-discovery.test.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",

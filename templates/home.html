@@ -5,11 +5,12 @@
 <div class="calculator-heading"><span class="calculator-icon" aria-hidden="true">↗</span><h2>{{calculatorTitle}}</h2><p>{{resultIntro}}</p></div>
 <div id="preview-banner" class="preview-banner" role="status"></div>
 <div class="form-grid"><div class="field"><label for="country-trigger">{{country}}</label>
-<div class="country-picker"><input id="country" type="hidden"><button id="country-trigger" class="country-trigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="country-menu" disabled><span id="country-trigger-label">{{loading}}</span><span aria-hidden="true">⌄</span></button>
+<div class="country-picker"><input id="country" type="hidden"><button id="country-trigger" class="country-trigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="country-menu" disabled><span id="country-trigger-label">{{selectCountry}}</span><span aria-hidden="true">⌄</span></button>
 <div id="country-menu" class="country-menu" role="dialog" aria-label="{{selectCountry}}" hidden><div class="country-search-wrap"><label class="sr-only" for="country-search">{{search}}</label><input id="country-search" type="search" placeholder="{{search}}" autocomplete="off"></div><div id="country-options" class="country-options"></div><div id="country-empty" class="country-empty" role="status" hidden>{{empty}}</div></div></div></div>
 <div class="field"><label for="income">{{income}}</label><div class="control money-control"><span id="currency" class="currency-prefix"></span><input id="income" inputmode="decimal" autocomplete="off" maxlength="28" aria-describedby="income-hint number-hint error" required></div><div id="income-hint" class="hint">{{hint}}</div><div id="number-hint" class="hint"></div></div></div>
-<p class="hint">{{currencyNote}}</p><button id="calculate" type="submit" class="calculate" disabled>{{loading}}</button><p id="error" class="error" role="alert"></p><button id="retry-data" class="ghost-action" type="button" hidden>{{retry}}</button>
-<noscript><p>{{noScript}} <a href="{{home}}countries/">{{browse}}</a></p></noscript>
+<p class="hint">{{currencyNote}}</p><button id="calculate" type="submit" class="calculate" disabled>{{calculate}}</button><p id="error" class="error" role="alert"></p><button id="retry-data" class="ghost-action" type="button" hidden>{{retry}}</button>
+<noscript><p>{{noScript}}</p></noscript>
+<p id="data-fallback" class="hint"><a href="{{home}}countries/">{{browse}} →</a></p>
 </form></div></section>
 </div>
 <div class="trust-strip container"><div><strong>{{countryCount}}</strong><span>{{coverageLabel}}</span></div><div><strong>{{languageCount}}</strong><span>{{languagesLabel}}</span></div><div><strong>WID.world</strong><span>{{source}}</span></div></div>

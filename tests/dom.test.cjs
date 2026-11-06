@@ -32,7 +32,7 @@ for(const [lang,input]of Object.entries(inputs))test(`${lang}: DOM flow calculat
 });
 test('failed data loading retries; malformed and negative input cannot produce results; blocked storage is handled',async()=>{
  const x=await setup('en',{failIndex:true,denyStorage:true}),{q}=x;try{
- assert.equal(q('#error').classList.contains('show'),true);q('#retry-data').click();await ready(()=>!q('#calculate').disabled);
+ assert.equal(q('#error').classList.contains('show'),true);assert.equal(q('#data-fallback').hidden,false);assert.equal(q('#data-fallback a').pathname,'/countries/');q('#retry-data').click();await ready(()=>!q('#calculate').disabled);
  for(const input of ['-50','not50','1e6','12,34','0','']){x.input(input);await x.submit();assert.equal(q('#results').hidden,true);assert.equal(q('#income').getAttribute('aria-invalid'),'true');}
  x.input('50000000');await x.submit();assert.equal(q('#results').hidden,false);q('#save-result').click();assert.match(q('#share-status').textContent,/does not allow/);
  }finally{x.close();}
@@ -48,5 +48,23 @@ test('late country responses never reveal a stale calculation after changing cou
  const x=await setup(),{q,w}=x;try{
  const fetch=w.fetch;let resolve;w.fetch=url=>url.endsWith('/KR.json')?new Promise(r=>resolve=()=>r({ok:true,json:async()=>data.countries.KR})):fetch(url);
  x.input('50000000');q('#income-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));q('.country-option[data-code="MY"]').click();resolve();await tick();await tick();assert.equal(q('#results').hidden,true);assert.equal(q('#country').value,'MY');assert.equal(q('#calculate').disabled,false);
+ }finally{x.close();}
+});
+
+test('a failed country download reveals static data and a second calculation recovers',async()=>{
+ const x=await setup('ja'),{w,q}=x;
+ try{
+  const original=w.fetch;
+  let fail=true;
+  w.fetch=url=>{
+   if(fail && url.endsWith('/KR.json')){fail=false;return Promise.reject(Error('offline'));}
+   return original(url);
+  };
+  x.input('50000000');await x.submit();
+  assert.equal(q('#data-fallback').hidden,false);
+  assert.equal(q('#data-fallback a').pathname,'/ja/countries/');
+  assert.equal(q('#results').hidden,true);
+  await x.submit();assert.equal(q('#results').hidden,false);
+  assert.equal(q('#data-fallback').hidden,true);
  }finally{x.close();}
 });

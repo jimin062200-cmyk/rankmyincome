@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import {JSDOM} from 'jsdom';
 import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../dist');
 const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(f=>f.isDirectory()?walk(path.join(d,f.name)):[path.join(d,f.name)]);
@@ -77,10 +78,35 @@ test('new tool scripts remain off the homepage and all new source locales have t
  const cfg=JSON.parse(fs.readFileSync('vercel.json'));assert.ok(cfg.redirects.some(r=>r.source==='/tools/:tool/index.html'&&r.permanent));
 });
 test('AdSense appears once on content routes and stays off errors and trust pages',()=>{
- for(const [file,html] of pages){const eligible=file.endsWith('index.html');assert.equal((html.match(/src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/g)||[]).length,eligible?1:0,file);assert.ok(!/class="adsbygoogle"/.test(html),file);assert.match(html,/name="google-adsense-account" content="ca-pub-2948191504774582"/,file);}
+ for(const [file,html] of pages){const eligible=/data-country-reading|data-search-comparison|id="ranking-table"|class="container growth-page guide-body"/.test(html);assert.equal((html.match(/src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/g)||[]).length,eligible?1:0,file);assert.ok(!/class="adsbygoogle"/.test(html),file);assert.match(html,/name="google-adsense-account" content="ca-pub-2948191504774582"/,file);}
  for(const name of ['about','methodology','data-sources','privacy','terms','contact']){
   const html=pages.get(path.join(root,name+'.html'));assert.ok(html,name);assert.ok(!/noindex/.test(html),name);assert.match(html,new RegExp(`href="https://rankmyincome.com/${name}\\.html"`));
  }
  const cases=[['countries/france/','FR',['BE','IT','ES'],'en'],['countries/pakistan/','PK',['IN','BD','NP'],'en'],['de/countries/mauritius/','MU',['SC','MG','ZA'],'de'],['de/countries/thailand/','TH',['VN','MY','ID'],'de'],['ja/countries/ecuador/','EC',['CO','PE','BO'],'ja']];
  for(const [route,code,peers,l] of cases){const html=pages.get(path.join(root,route,'index.html'));assert.match(html,/data-country-reading/);for(const k of [code,...peers]){const c=data.countries[k],v=c.thresholds.find(([p])=>p===50)[1]/c.pppPerWorldUnit;assert.ok(html.includes(`<td>${new Intl.NumberFormat(l,{maximumFractionDigits:2}).format(v)}</td>`),route+k);}}
+});
+
+test('every nearest-median comparison uses the closest PPP median and the local p90/p50',()=>{
+ const at=(c,p)=>c.thresholds.find(([n])=>n===p)[1];
+ const median=c=>at(c,50)/c.pppPerWorldUnit;
+ const countries=Object.entries(data.countries);
+ const summary=JSON.parse(fs.readFileSync(path.join(root,`data/${info.version}/index.json`)));
+ for(const [code,country] of countries){
+  const candidates=countries.filter(([k])=>k!==code);
+  const distance=c=>Math.abs(Math.log(median(c)/median(country)));
+  const [peerCode,peer]=candidates.reduce((best,row)=>distance(row[1])<distance(best[1])?row:best);
+  for(const lang of locales){
+   const prefix=lang==='en'?'':lang.split('-')[0]+'/';
+   const html=pages.get(path.join(root,prefix,'countries',summary.countries[code].slug,'index.html'));
+   const table=html.match(/data-median-peer>[\s\S]*?<tbody>([\s\S]*?)<\/tbody>/);
+   if(!table){assert.match(html,/data-country-reading|data-search-answer|data-seo-answer/);continue;}
+   const nf=new Intl.NumberFormat(lang,{maximumFractionDigits:2});
+   const name=new Intl.DisplayNames([lang],{type:'region'});
+   const rows=JSDOM.fragment('<table>'+table[1]+'</table>').querySelectorAll('tr');
+   assert.equal(rows.length,2);
+   for(const [i,[k,c]] of [[code,country],[peerCode,peer]].entries()){
+    assert.deepEqual(Array.from(rows[i].cells,cell=>cell.textContent),[name.of(k),nf.format(median(c)),nf.format(at(c,90)/at(c,50))+'×',c.dataYear+' / '+c.pppYear]);
+   }
+  }
+ }
 });

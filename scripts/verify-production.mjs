@@ -62,6 +62,25 @@ try {
  assert.ok([301,308].includes(redirect.response.status),'index.html must permanently redirect');
  assert.equal(new URL(redirect.response.headers.get('location'),origin).href,origin+'/');
  report.checks.push({path:'/index.html',status:redirect.response.status});
+ // Exercise each inventory class on the deployed HTML, including a localized analysis.
+ const inventory=[
+  ['/',false],['/countries/',false],['/tools/',false],['/rankings/',false],
+  ['/guides/',false],['/compare/',false],['/countries/bhutan/',false],
+  ['/tools/salary-converter/',false],['/ko/countries/malaysia/',true],
+  ['/rankings/median-income/',true],['/guides/country-vs-global-rank/',true],
+  ['/privacy.html',false],['/__rankmyincome_missing_route__/',false]
+ ];
+ for(const [route,eligible] of inventory){
+  await check(route,({response,text})=>{
+   assert.equal(response.status,route==='/__rankmyincome_missing_route__/'?404:200);
+   const document=new JSDOM(text).window.document;
+   assert.equal(document.querySelectorAll('script[src*="pagead/js/adsbygoogle.js"]').length,Number(eligible),route);
+   if(eligible)assert.ok(document.querySelector('script[src$="client=ca-pub-2948191504774582"]'),route);
+   if(route==='/')assert.ok(document.querySelector('#data-fallback a[href="/countries/"]'),route);
+   if(route==='/countries/bhutan/')assert.equal(document.querySelectorAll('[data-median-peer] tbody tr').length,2,route);
+   document.defaultView.close();
+  });
+ }
  const document=new JSDOM(homepage).window.document;
  const assets=[...document.querySelectorAll('script[src^="/assets/"],link[href^="/assets/"]')].map(x=>x.getAttribute('src')||x.getAttribute('href'));
  assets.push(document.body.dataset.source+'index.json',document.body.dataset.source+'KR.json');

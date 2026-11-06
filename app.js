@@ -16,8 +16,8 @@ const countryName=code=>regionNames?.of(code)||DATA.countries[code].name;
 function node(tag,text,className){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;}
 function resultVisible(visible){$('#results').hidden=!visible;$('#results').classList.toggle('show',visible);}
 function invalidateResult(){calculationRevision++;comparisonRevision++;LAST_RESULT=null;resultVisible(false);$('#share-status').textContent='';$('#saved-change').textContent='';}
-function displayError(key){$('#error').textContent=t(key);$('#error').classList.add('show');}
-function clearError(){$('#error').classList.remove('show');$('#error').textContent='';$('#income').removeAttribute('aria-invalid');}
+function displayError(key){$('#data-fallback').hidden=key!=='loadError';$('#error').textContent=t(key);$('#error').classList.add('show');}
+function clearError(){$('#data-fallback').hidden=true;$('#error').classList.remove('show');$('#error').textContent='';$('#income').removeAttribute('aria-invalid');}
 async function fetchJSON(file){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),12000);try{const r=await fetch(document.body.dataset.source+file,{signal:controller.signal});if(!r.ok)throw Error(`Data HTTP ${r.status}`);return await r.json();}finally{clearTimeout(timer);}}
 async function countryData(code){
  if(!DATA?.countries[code])throw Error('Unknown country');
@@ -196,7 +196,7 @@ async function loadData(){
   setCountry(DATA.countries[initial]?initial:'KR');renderSaved();
   $('#calculate').disabled=false;$('#calculate').textContent=t('calculate');
   $('#preview-banner').textContent=DATA.meta.status==='production'?'':t('preview');$('#preview-banner').classList.toggle('show',DATA.meta.status!=='production');
- }catch{displayError('loadError');$('#retry-data').hidden=false;$('#calculate').textContent=t('calculate');}
+ }catch{$('#country-trigger-label').textContent=t('selectCountry');displayError('loadError');$('#retry-data').hidden=false;$('#calculate').textContent=t('calculate');}
 }
 $('#number-hint').textContent=t('numberHint',{example:number(12345.67,2)});
 $('#income-form').addEventListener('submit',calculate);

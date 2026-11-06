@@ -55,13 +55,13 @@ test('invalid input, localStorage denied, data failure and retry recover accessi
 });
 test('country directories filter and localized country links preserve the correct locale',async({page})=>{
  await page.goto('/ko/countries/');await page.locator('#directory-search').fill('대한민국');await expect(page.locator('.country-link:visible')).toHaveCount(1);await page.locator('.country-link:visible').click();
- await expect(page).toHaveURL(/\/ko\/countries\/south-korea\//);await expect(page.locator('h1')).toContainText('대한민국');await expect(page.locator('.threshold-table tbody tr')).toHaveCount(6);
+ await expect(page).toHaveURL(/\/ko\/countries\/south-korea\//);await expect(page.locator('h1')).toContainText('대한민국');await expect(page.locator('.country-data-section .threshold-table tbody tr')).toHaveCount(6);
  await page.locator('.country-cta').click();await expect(page.locator('#country')).toHaveValue('KR');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
  const missing=await page.goto('/this-page-does-not-exist');expect(missing.status()).toBe(404);await expect(page.locator('h1')).toContainText('not found');
 });
 test('no-JavaScript navigation and country thresholds remain useful',async({browser})=>{
  const context=await browser.newContext({javaScriptEnabled:false});const page=await context.newPage();await page.route('**/pagead2.googlesyndication.com/**',route=>route.abort());
- await page.goto('http://127.0.0.1:8765/ja/');await expect(page.locator('noscript')).toBeVisible();await page.goto('http://127.0.0.1:8765/ja/countries/japan/');await expect(page.locator('table tbody tr')).toHaveCount(6);await context.close();
+ await page.goto('http://127.0.0.1:8765/ja/');await expect(page.locator('noscript')).toBeVisible();await page.goto('http://127.0.0.1:8765/ja/countries/japan/');await expect(page.locator('.country-data-section .threshold-table tbody tr')).toHaveCount(6);await context.close();
 });
 test('redesigned home and country pages fit all eight languages at 320px',async({page})=>{
  await page.setViewportSize({width:320,height:850});

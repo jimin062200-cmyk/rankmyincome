@@ -14,7 +14,7 @@ test('updated country and ranking content remains readable on a narrow screen wi
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),route).toBeTruthy();
   if(route.includes('/countries/')){await expect(page.locator('[data-search-comparison]')).toBeVisible();await expect(page.locator('[data-search-comparison] tbody tr')).toHaveCount(4);}
   else if(!route.endsWith('/rankings/'))await expect(page.locator('[data-ranking-links] a')).toHaveCount(3);
-  expect(await page.locator('script[src*="adsbygoogle.js"]').count()).toBe(1);
+  expect(await page.locator('script[src*="adsbygoogle.js"]').count()).toBe(route.endsWith('/rankings/')?0:1);
  }
  await context.close();
 });

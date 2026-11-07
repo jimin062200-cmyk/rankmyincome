@@ -20,6 +20,13 @@ test('privacy links to a consent-capable guide and its WID source rows', async (
   await page.getByRole('link', { name: 'country and global rank guide' }).click();
   await expect(page).toHaveURL(/\/guides\/country-vs-global-rank\/$/);
   await expect(page.locator('script[src*="adsbygoogle"]')).toHaveCount(1);
+  const article = await page.locator('script[type="application/ld+json"]').evaluateAll(scripts =>
+    scripts.flatMap(script => JSON.parse(script.textContent)['@graph'] || []).find(node => node['@type'] === 'Article')
+  );
+  const modified = page.locator('article time');
+  await expect(modified).toHaveAttribute('datetime', article.dateModified);
+  const dateLabel = new Date(article.dateModified).toLocaleDateString('en-GB', { dateStyle: 'long', timeZone: 'UTC' });
+  await expect(modified).toHaveText(dateLabel);
   await page.getByRole('link', { name: 'Check the matching row in the current WID release' }).click();
   await expect(page).toHaveURL(/\/data-sources\.html#malaysia-source$/);
   await expect(page.locator('#malaysia-source')).toBeInViewport();

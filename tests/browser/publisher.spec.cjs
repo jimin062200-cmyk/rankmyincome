@@ -13,3 +13,19 @@ test('publisher content and trust navigation remain readable without JavaScript'
  }
  const missing=await page.goto('http://127.0.0.1:8765/__publisher_missing__/');expect(missing.status()).toBe(404);expect(await page.locator('script[src*="googlesyndication"]').count()).toBe(0);await context.close();
 });
+
+test('privacy links to a consent-capable guide and its WID source rows', async ({ page }) => {
+  await page.goto('/privacy.html');
+  await expect(page.locator('script[src*="adsbygoogle"]')).toHaveCount(0);
+  await page.getByRole('link', { name: 'country and global rank guide' }).click();
+  await expect(page).toHaveURL(/\/guides\/country-vs-global-rank\/$/);
+  await expect(page.locator('script[src*="adsbygoogle"]')).toHaveCount(1);
+  await page.getByRole('link', { name: 'Check the matching row in the current WID release' }).click();
+  await expect(page).toHaveURL(/\/data-sources\.html#malaysia-source$/);
+  await expect(page.locator('#malaysia-source')).toBeInViewport();
+  await expect(page.getByRole('link', { name: 'Malaysia data CSV' }))
+    .toHaveAttribute('href', 'https://wid.world/bulk_download/WID_data_MY.csv');
+  await expect(page.getByRole('link', { name: 'Malaysia metadata CSV' }))
+    .toHaveAttribute('href', 'https://wid.world/bulk_download/WID_metadata_MY.csv');
+  await expect(page.locator('script[src*="adsbygoogle"]')).toHaveCount(0);
+});
